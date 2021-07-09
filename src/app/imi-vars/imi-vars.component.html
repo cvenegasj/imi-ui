@@ -1,0 +1,137 @@
+<mat-card class="card-1"> 
+
+    <mat-card-content fxLayout="row">
+    
+        <div fxFlex style="padding-top: 25px;">
+            
+            <mat-accordion multi>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <mat-panel-title class="font-13 bold uppercase">
+                        Product management
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="slider-container">
+                        <mat-label>Product development</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Design</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Fabrication</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <mat-panel-title class="font-13 bold uppercase">
+                        Resources management
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="slider-container">
+                        <mat-label>Materials management</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Energy source</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Supply chain and distribution</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <mat-panel-title class="font-13 bold uppercase">
+                        Information management
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="slider-container">
+                        <mat-label>Data collection</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Register and data processing</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Interface, dashboard and data visualization</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <mat-panel-title class="font-13 bold uppercase">
+                        Organization management
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="slider-container">
+                        <mat-label>Organization model</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Impact scale</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Compliance</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <mat-panel-title class="font-13 bold uppercase">
+                        Innovation management
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="slider-container">
+                        <mat-label>Innovation</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Training</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Intelectual property</mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                    </div>
+                </mat-expansion-panel>
+            
+            </mat-accordion>
+
+        </div>
+
+        <div fxLayout="column">
+            <div class="centered" style="padding: 20px 0 25px;">
+                <span class="bold font-19">IMI score:</span>
+                <span class="bolder font-22" style="margin-left: 10px;">3.6</span>
+            </div>
+            <div #chartContainer></div>
+        </div>
+
+    </mat-card-content>
+
+</mat-card>

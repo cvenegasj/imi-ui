@@ -1,0 +1,115 @@
+<div style="margin: 30px auto;">
+
+    <h1 class="bolder purple-700">
+        Company Data
+    </h1>
+
+    <div *ngIf="!isUpdateFormVisible">
+        LOL
+
+        <div>
+            <button mat-raised-button (click)="isUpdateFormVisible = !isUpdateFormVisible;">Update data</button>
+        </div>
+    </div>
+
+    <form #form1="ngForm" [formGroup]="formGroup" (ngSubmit)="onSaveData()" *ngIf="isUpdateFormVisible">
+        <div>
+            <mat-form-field appearance="fill" style="width: 300px;">
+                <mat-label>Company name</mat-label>
+                <input matInput placeholder="Company name" formControlName="firstCtrl" required>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill" style="width: 400px;">
+                <mat-label>Company description</mat-label>
+                <textarea matInput placeholder="Company description" formControlName="secondCtrl" rows="6"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill" style="width: 300px;">
+                <mat-label>Contact phone</mat-label>
+                <input matInput type="tel" placeholder="Phone number" formControlName="thirdCtrl">
+            </mat-form-field>
+        </div>
+    
+        <div>
+            <mat-form-field appearance="fill" style="width: 400px;">
+                <mat-label>Website</mat-label>
+                <input matInput type="url" placeholder="Website" formControlName="fourthCtrl">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill" style="width: 400px;">
+                <mat-chip-list #urlList class="mat-chip-list-stacked">
+                    <mat-chip *ngFor="let url of urls"
+                            [removable]="true" (removed)="removeUrl(url)">
+                        {{url}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input style="flex: 1 0 40px;" 
+                            placeholder="Add any external link"
+                            formControlName="fifthCtrl"
+                            [matChipInputFor]="urlList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="true"
+                            (matChipInputTokenEnd)="addUrl($event)">
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill" style="width: 400px;">
+                <mat-chip-list #countryList>
+                    <mat-chip *ngFor="let country of selectedCountries"
+                            [removable]="true" (removed)="removeCountry(country)">
+                        {{country}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input #countryInput
+                            placeholder="Countries"
+                            formControlName="sixthCtrl"
+                            [matChipInputFor]="countryList"
+                            [matAutocomplete]="autoCountries">
+                </mat-chip-list>
+                
+                <mat-autocomplete #autoCountries="matAutocomplete" (optionSelected)="selectCountry($event)">
+                    <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                    {{country}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill" style="width: 400px;">
+                <mat-chip-list #industryList>
+                    <mat-chip *ngFor="let industry of selectedIndustries"
+                            [removable]="true" (removed)="removeIndustry(industry)">
+                        {{industry}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input #industryInput
+                            placeholder="Industry sector"
+                            formControlName="seventhCtrl"
+                            [matChipInputFor]="industryList"
+                            [matAutocomplete]="autoIndustries">
+                </mat-chip-list>
+
+                <mat-autocomplete #autoIndustries="matAutocomplete" (optionSelected)="selectIndustry($event)">
+                    <mat-option *ngFor="let industry of filteredIndustries | async" [value]="industry">
+                      {{industry}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <button mat-raised-button (click)="isUpdateFormVisible = !isUpdateFormVisible;" style="margin-right: 5px;">Cancel</button>
+            <button mat-raised-button color="accent" type="submit" [disabled]="!(form1.valid)">Done</button>
+        </div>
+    </form>
+
+</div>

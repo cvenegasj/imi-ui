@@ -1,0 +1,205 @@
+<div style="min-height: calc(100vh - 100px); display: flex; flex-flow: column; padding: 15px;">
+
+    <mat-stepper linear #stepper style="width: 80%; flex: 1 1 auto; margin: 0 auto;">
+        <mat-step label="User type">
+            <div class="centered" style="margin-top: 20px;">
+                <p class="font-20">Sign up as</p>
+
+                <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="setUserType('client')">Client Company</button>
+                <button mat-raised-button color="primary" (click)="setUserType('provider')">Provider Company</button>
+            </div>
+        </mat-step>
+
+        <mat-step [stepControl]="firstFormGroup" label="Company data">
+            <form #form1="ngForm" [formGroup]="firstFormGroup" style="margin-top: 20px; padding: 0 40px;">
+                <div>
+                    <mat-form-field appearance="fill" style="width: 300px;">
+                        <mat-label>Company name</mat-label>
+                        <input matInput placeholder="Company name" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Company description</mat-label>
+                        <textarea matInput placeholder="Company description" formControlName="secondCtrl" rows="6"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill" style="width: 300px;">
+                        <mat-label>Contact phone</mat-label>
+                        <input matInput type="tel" placeholder="Phone number" formControlName="thirdCtrl">
+                    </mat-form-field>
+                </div>
+            
+                <div>
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Website</mat-label>
+                        <input matInput type="url" placeholder="Website" formControlName="fourthCtrl">
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-chip-list #urlList class="mat-chip-list-stacked">
+                            <mat-chip *ngFor="let url of urls"
+                                    [removable]="true" (removed)="removeUrl(url)">
+                                {{url}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input style="flex: 1 0 40px;" 
+                                    placeholder="Add any external link"
+                                    formControlName="fifthCtrl"
+                                    [matChipInputFor]="urlList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    [matChipInputAddOnBlur]="true"
+                                    (matChipInputTokenEnd)="addUrl($event)">
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-chip-list #countryList>
+                            <mat-chip *ngFor="let country of selectedCountries"
+                                    [removable]="true" (removed)="removeCountry(country)">
+                                {{country}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input #countryInput
+                                    placeholder="Countries"
+                                    formControlName="sixthCtrl"
+                                    [matChipInputFor]="countryList"
+                                    [matAutocomplete]="autoCountries">
+                        </mat-chip-list>
+                        
+                        <mat-autocomplete #autoCountries="matAutocomplete" (optionSelected)="selectCountry($event)">
+                            <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                            {{country}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-chip-list #industryList>
+                            <mat-chip *ngFor="let industry of selectedIndustries"
+                                    [removable]="true" (removed)="removeIndustry(industry)">
+                                {{industry}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input #industryInput
+                                    placeholder="Industry sector"
+                                    formControlName="seventhCtrl"
+                                    [matChipInputFor]="industryList"
+                                    [matAutocomplete]="autoIndustries">
+                        </mat-chip-list>
+
+                        <mat-autocomplete #autoIndustries="matAutocomplete" (optionSelected)="selectIndustry($event)">
+                            <mat-option *ngFor="let industry of filteredIndustries | async" [value]="industry">
+                              {{industry}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="finishSignUp()" [disabled]="!(form1.valid)">Done</button>
+                </div>
+            </form>
+        </mat-step>
+        
+        <!--
+        <mat-step [stepControl]="secondFormGroup" label="IMI variables" *ngIf="userType === 'client'">
+            
+            <p class="font-20 centered" style="margin-top: 20px;">Estimate your IMI variables</p>
+
+            <form [formGroup]="secondFormGroup" style="padding: 0 40px;">
+                <div fxLayout="row" fxLayout.lt-sm="column">
+                    <div fxFlex style="margin-left: 65px;">
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Product paradigm</mat-label>
+                            <mat-slider formControlName="slider1Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Design</mat-label>
+                            <mat-slider formControlName="slider2Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Analisis</mat-label>
+                            <mat-slider formControlName="slider3Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Fabrication</mat-label>
+                            <mat-slider formControlName="slider4Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Distribution</mat-label>
+                            <mat-slider formControlName="slider5Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Capacitation type</mat-label>
+                            <mat-slider formControlName="slider6Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Intellectual property</mat-label>
+                            <mat-slider formControlName="slider7Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+                    </div>
+
+                    <div fxFlex style="margin-left: 65px;">
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Role</mat-label>
+                            <mat-slider formControlName="slider8Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Register</mat-label>
+                            <mat-slider formControlName="slider9Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Processing</mat-label>
+                            <mat-slider formControlName="slider10Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Energy</mat-label>
+                            <mat-slider formControlName="slider11Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Materials</mat-label>
+                            <mat-slider formControlName="slider12Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Infrastructure</mat-label>
+                            <mat-slider formControlName="slider13Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+        
+                        <div style="padding-top: 17px;">
+                            <mat-label style="width: 130px; display: inline-block;">Scale</mat-label>
+                            <mat-slider formControlName="slider14Ctrl" thumbLabel tickInterval="1" min="1" max="5" step="1"></mat-slider>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="finishSignUp()">Done</button>
+                </div>
+            </form>
+        </mat-step> -->
+    </mat-stepper>
+
+</div>

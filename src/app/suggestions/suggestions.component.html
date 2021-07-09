@@ -1,0 +1,61 @@
+<div style="width: 93%; margin: 10px auto 30px;" fxLayout="row wrap" fxLayoutGap="10px">
+    
+    <mat-card class="card-2" *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+        <mat-card-title class="font-17">
+            <a class="green-800 link-hvr-underline" href="">
+                Empresa {{i + 1}}
+            </a>
+        </mat-card-title>
+
+        <mat-card-content>
+        
+            <div class="badges">
+                <p style="margin-bottom: 10px;">Services</p>
+
+                <mat-icon class="green-a700"
+                    matTooltip="Info about the action"
+                    matTooltipPosition="above">
+                    verified
+                </mat-icon>
+                <mat-icon class="green-a700"
+                    matTooltip="Info about the action"
+                    matTooltipPosition="above">
+                    badge
+                </mat-icon>
+                <mat-icon class="green-a700"
+                    matTooltip="Info about the action"
+                    matTooltipPosition="above">
+                    military_tech
+                </mat-icon>
+                <mat-icon class="green-a700"
+                    matTooltip="Info about the action"
+                    matTooltipPosition="above">
+                    local_police
+                </mat-icon>
+                <mat-icon class="green-a700"
+                    matTooltip="Info about the action"
+                    matTooltipPosition="above">
+                    badge
+                </mat-icon>
+            </div>
+
+            <div class="content-detail">
+                <mat-icon>public</mat-icon>
+                <a class="link-hvr-underline" href="https://google.com" target="_blank">google.com</a>
+            </div>
+
+            <div class="content-detail">
+                <mat-icon>email</mat-icon>
+                <a class="link-hvr-underline" href="mailto: abc@example.com">abc@example.com</a>
+            </div>
+
+            <div class="content-detail">
+                <mat-icon>phone</mat-icon>
+                <a class="link-hvr-underline" href="https://wa.me/51955088838" target="_blank">51955088838</a>
+            </div>
+            
+        </mat-card-content>
+
+    </mat-card>
+
+</div>
