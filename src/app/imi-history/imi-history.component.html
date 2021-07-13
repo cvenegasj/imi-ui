@@ -1,5 +1,55 @@
-<div>
+<div style="margin: 35px 25px;">
 
-    <p>imi-history works!</p>
+    <h1 class="bolder purple-700">
+        IMI History
+    </h1>
+
+    <mat-card class="card-1" style="margin-bottom: 100px;">
+        <mat-card-content fxLayout="row" style="padding: 50px;">
+            
+            <div #chartContainer></div>
+
+            <div>
+                <mat-button-toggle-group multiple vertical name="legend" aria-label="Legend">
+                    <mat-button-toggle #toggle1 [value]="true"
+                        class="toggle-1"
+                        (click)="toggle1.value = !toggle1.value; toggleLine('.line-0', toggle1.value)">
+                        Average IMI
+                    </mat-button-toggle>
+                    
+                    <mat-button-toggle #toggle2 [value]="true" 
+                        class="toggle-2"
+                        (click)="toggle2.value = !toggle2.value; toggleLine('.line-1', toggle2.value)">
+                        Product
+                    </mat-button-toggle>
+                    
+                    <mat-button-toggle #toggle3 [value]="true"
+                        class="toggle-3"
+                        (click)="toggle3.value = !toggle3.value; toggleLine('.line-2', toggle3.value)">
+                        Resources
+                    </mat-button-toggle>
+
+                    <mat-button-toggle #toggle4 [value]="true"
+                        class="toggle-4"
+                        (click)="toggle4.value = !toggle4.value; toggleLine('.line-3', toggle4.value)">
+                        Information
+                    </mat-button-toggle>
+
+                    <mat-button-toggle #toggle5 [value]="true"
+                        class="toggle-5"
+                        (click)="toggle5.value = !toggle5.value; toggleLine('.line-4', toggle5.value)">
+                        Organization
+                    </mat-button-toggle>
+
+                    <mat-button-toggle #toggle6 [value]="true"
+                        class="toggle-6"
+                        (click)="toggle6.value = !toggle6.value; toggleLine('.line-5', toggle6.value)">
+                        Innovation
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
 
 </div>

@@ -231,7 +231,7 @@ export class CompleteSignupComponent implements OnInit {
 
   getClientObject(): Client {
     let client = new Client();
-    client.name = this.firstFormGroup.get('firstCtrl')!.value;
+    client.companyName = this.firstFormGroup.get('firstCtrl')!.value;
     client.description = this.firstFormGroup.get('secondCtrl')!.value;
     client.phone = this.firstFormGroup.get('thirdCtrl')!.value;
     client.website = this.firstFormGroup.get('fourthCtrl')!.value;
@@ -243,7 +243,7 @@ export class CompleteSignupComponent implements OnInit {
 
   getProviderObject(): Provider {
     let provider = new Provider();
-    provider.name = this.firstFormGroup.get('firstCtrl')!.value;
+    provider.companyName = this.firstFormGroup.get('firstCtrl')!.value;
     provider.description = this.firstFormGroup.get('secondCtrl')!.value;
     provider.phone = this.firstFormGroup.get('thirdCtrl')!.value;
     provider.website = this.firstFormGroup.get('fourthCtrl')!.value;

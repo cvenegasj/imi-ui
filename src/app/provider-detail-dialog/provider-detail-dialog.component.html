@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>
+    <span>Empresa ABC</span>
+    <span fxFlex></span>
+    <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</h1>
+
+<mat-dialog-content>
+    <div>
+        <p class="gray-700">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non lacinia nibh, nec aliquet est. Quisque in dolor malesuada, 
+            molestie massa sed, elementum dolor. Suspendisse vestibulum mauris dolor, id venenatis dui rutrum sit amet. Quisque pellentesque 
+            pretium odio, vitae congue justo commodo ut. Duis viverra dapibus vehicula. Cras sapien arcu, sodales in consequat ac, vestibulum 
+            tempor enim. Integer eros dolor, semper quis pellentesque et, imperdiet non sapien.
+        </p>
+    </div>
+
+    <div>
+        <mat-icon class="green-a700" style="vertical-align: bottom;">public</mat-icon>
+        <span [innerHTML]="'www.google.com' | linky" class="gray-700" style="margin-left: 5px;"></span>
+    </div>
+
+    <div style="margin-top: 15px;">
+        <mat-icon class="green-a700" style="vertical-align: bottom;">phone</mat-icon>
+        <a href="https://wa.me/51955088838" class="gray-700" style="margin-left: 5px;">+51955088838</a>
+    </div>
+    
+    <div style="margin-top: 15px;">
+        <mat-icon class="green-a700" style="vertical-align: bottom;">email</mat-icon>
+        <a href="mailto: abc@example.com" class="gray-700" style="margin-left: 5px;">abc@example.com</a>
+    </div>
+
+    <div>
+        countries
+    </div>
+
+    <div>
+        industries
+    </div>
+    
+    <div>
+        External URLs
+    </div>
+
+
+</mat-dialog-content>

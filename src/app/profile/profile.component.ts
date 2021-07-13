@@ -21,7 +21,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class ProfileComponent implements OnInit {
 
-  appUser: any;
+  appUser: any; // can be Client or Provider
+
   isUpdateFormVisible = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -91,7 +92,7 @@ export class ProfileComponent implements OnInit {
         .subscribe(appUser => {
           this.appUser = appUser;
 
-          this.formGroup.get('firstCtrl')!.setValue(this.appUser.name);
+          this.formGroup.get('firstCtrl')!.setValue(this.appUser.companyName);
           this.formGroup.get('secondCtrl')!.setValue(this.appUser.description);
           this.formGroup.get('thirdCtrl')!.setValue(this.appUser.phone);
           this.formGroup.get('fourthCtrl')!.setValue(this.appUser.website);

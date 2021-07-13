@@ -9,6 +9,8 @@ import * as d3 from "d3";
 })
 export class ImiVarsComponent implements OnInit, AfterViewInit {
 
+  disabledSliders: boolean = true;
+
   data = [
     [ 
       {axis: "Product", value: 3},
@@ -33,7 +35,6 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chartContainer', {static: true}) 
   chartContainer!: ElementRef;
-
   dimensions: DimensionsType;
   wrapper: any;
   bounds: any;
@@ -44,8 +45,8 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       marginRight: 50,
       marginBottom: 50,
       marginLeft: 50,
-      height: 430,
-      width: 430,
+      height: 450,
+      width: 450,
     }
     this.dimensions = {
       ...this.dimensions, 
@@ -54,11 +55,15 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.createChart();
+  }
+
+  saveChanges(): void {
+    
+    this.disabledSliders = true;
   }
 
   createChart(): void {

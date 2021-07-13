@@ -142,6 +142,26 @@ a.link-hvr-underline:hover {
     line-height: 32px !important;
 }
 
+.gray-50 {
+    color: #FAFAFA;
+}
+
+.gray-100 {
+    color: #F5F5F5;
+}
+
+.gray-500 {
+    color: #9E9E9E;
+}
+
+.gray-600 {
+    color: #757575;
+}
+
+.gray-700 {
+    color: #616161;
+}
+
 .purple-700 {
     color: #7B1FA2;
 }
@@ -152,6 +172,10 @@ a.link-hvr-underline:hover {
 
 .purple-900 {
     color: #4A148C;
+}
+
+.green-700 {
+    color: #388E3C;
 }
 
 .green-800 {
@@ -192,17 +216,20 @@ mat-card.card-1 {
     padding: 15px !important;
     width: 90%;
     margin: 10px auto 0;
-    border-radius: 13px;
-    /*box-shadow: 6px 5px 19px -7px rgba(0,0,0,0.51) !important;*/
+    border-radius: 30px;
+    box-shadow: -3px 13px 25px -1px rgba(0,0,0,0.61) !important;
 }
 
 mat-card.card-2 {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 190px;
+    background-color: #9C27B0;
+    border-radius: 20px;
+    box-shadow: -4px 13px 28px 0px rgba(0,0,0,0.56) !important;
 }
 
 mat-card.card-2 mat-card-content > div.content-detail {
-    color: #616161;
+    color: #F5F5F5;
     font-size: 13px !important;
     line-height: 17px !important;
     padding: 3px 0;
@@ -218,16 +245,10 @@ mat-card.card-2 mat-card-content > div.badges {
     padding: 5px 0;
 }
 
-mat-card.card-2 mat-card-content > div.badges > p {
-    color: #616161;
-    font-size: 13px;
-    line-height: 17px;
-    margin-bottom: 5px;
-}
-
 mat-card.card-2 mat-card-content > div.badges mat-icon {
     margin-right: 7px;
     font-size: 27px;
+    color: #00E676;
 }
 
 div.imi-vars-group {
@@ -243,4 +264,182 @@ div.slider-container mat-label {
     color: #616161;
     width: 110px; 
     display: inline-block;
+}
+
+div.slider-container mat-label mat-icon {
+    vertical-align: bottom;
+    color: #00C853;
+}
+div.slider-container span.score-slider {
+    font-size: 13px !important;
+    line-height: 17px !important;
+    color: #616161;
+    margin-left: 5px;
+}
+
+div.profile-data-container > div {
+    margin-top: 30px;
+}
+
+div.profile-data-container > div div.label {
+    color: #616161;
+    display: inline-block;
+    width: 160px;
+    vertical-align: top;
+}
+
+div.profile-data-container > div div.datum {
+    display: inline-block;
+}
+
+mat-expansion-panel-header mat-panel-title mat-icon {
+    vertical-align: top;
+    position: relative;
+    top: -2px;
+    margin-right: 10px;
+}
+
+/* AXES */
+/* ticks */
+.axis line {
+    stroke: #706f6f;
+    stroke-width: 0.5;
+    shape-rendering: crispEdges;
+}
+    
+/* axis contour */
+.axis path {
+    stroke: #706f6f;
+    stroke-width: 0.7;
+    shape-rendering: crispEdges;
+}
+    
+/* axis text */
+.axis text {
+    fill: #2b2929;
+    font-size: 100%;
+}
+
+/* LINE CHART */
+path.line-0 {
+    fill: none;
+    stroke: #06D6A0;
+}
+
+path.line-1 {
+    fill: none;
+    stroke: #FFD166;
+    /*stroke-dasharray: 2;*/
+}
+
+path.line-2 {
+    fill: none;
+    stroke: #118AB2;
+    /*stroke-dasharray: 6;*/
+}
+
+path.line-3 {
+    fill: none;
+    stroke: #EF476F;
+    /*stroke-dasharray: 6;*/
+}
+
+path.line-4 {
+    fill: none;
+    stroke: #073B4C;
+    /*stroke-dasharray: 6;*/
+}
+
+path.line-5 {
+    fill: none;
+    stroke: #f77f00;
+    /*stroke-dasharray: 6;*/
+}
+
+.label-0 {
+    fill: #06D6A0;
+    /*font-family: Georgia;*/
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.label-1 {
+    fill: #FFD166;
+    /*font-family: Georgia;*/
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.label-2 {
+    fill: #118AB2;
+    /*font-family: Georgia;*/
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.label-3 {
+    fill: #EF476F;
+    /*font-family: Georgia;*/
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.label-4 {
+    fill: #073B4C;
+    /*font-family: Georgia;*/
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.label-5 {
+    fill: #f77f00;
+    /*font-family: Georgia;*/
+    font-size: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+  
+.grid path {
+    stroke-width: 0;
+}
+
+mat-button-toggle.toggle-1 {
+    color: white;
+    background-color: #06D6A0;
+}
+
+mat-button-toggle.toggle-2 {
+    color: white;
+    background-color: #FFD166;
+}
+
+mat-button-toggle.toggle-3 {
+    color: white;
+    background-color: #118AB2;
+}
+
+mat-button-toggle.toggle-4 {
+    color: white;
+    background-color: #EF476F;
+}
+
+mat-button-toggle.toggle-5 {
+    color: white;
+    background-color: #073B4C;
+}
+
+mat-button-toggle.toggle-6 {
+    color: white;
+    background-color: #f77f00;
 }

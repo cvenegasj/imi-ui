@@ -6,6 +6,7 @@ import { AppMaterialModule } from './app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
+import { LinkyModule } from 'ngx-linky';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -15,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CompleteSignupComponent } from './complete-signup/complete-signup.component';
 import { ImiVarsComponent } from './imi-vars/imi-vars.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { ProviderDetailDialogComponent } from './provider-detail-dialog/provider-detail-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
     CompleteSignupComponent,
     ImiVarsComponent,
     SuggestionsComponent,
+    ProviderDetailDialogComponent,
 
   ],
   imports: [
@@ -39,6 +42,7 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
       domain: 'symbiocreation.auth0.com',
       clientId: 'biZYk7qdeMeay5gDWODOg0A707P2JEnR'
     }),
+    LinkyModule,
     
   ],
   providers: [],

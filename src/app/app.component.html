@@ -33,15 +33,10 @@
 </mat-toolbar>
 
 <div fxLayout="row" class="radial-background">
-
-    <!--
-    <div class="loading centered" *ngIf="isLoading">
-        <img src="assets/loading.svg" alt="loading">
-    </div> 
-    -->
     
     <!-- Side Navigation List -->
     <app-navlist fxFlex="20" *ngIf="sharedService.appUser$ | async"></app-navlist>
+    
     <!-- Routed content -->
     <div fxFlex>
         <router-outlet></router-outlet>

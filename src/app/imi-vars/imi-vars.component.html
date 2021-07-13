@@ -2,133 +2,200 @@
 
     <mat-card-content fxLayout="row">
     
-        <div fxFlex style="padding-top: 25px;">
+        <div fxFlex style="padding-top: 95px; margin-right: 60px; margin-left: 40px;">
             
             <mat-accordion multi>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                    <mat-panel-title class="font-13 bold uppercase">
-                        Product management
-                    </mat-panel-title>
+                        <mat-panel-title class="font-13 bold uppercase">
+                            <mat-icon>design_services</mat-icon>
+                            Product management
+                        </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div class="slider-container">
-                        <mat-label>Product development</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>settings_suggest</mat-icon>
+                            Product
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">3</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Design</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>view_in_ar</mat-icon>
+                            Design
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">4</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Fabrication</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>precision_manufacturing</mat-icon>
+                            Fabrication
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">3</span>
                     </div>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                    <mat-panel-title class="font-13 bold uppercase">
-                        Resources management
-                    </mat-panel-title>
+                        <mat-panel-title class="font-13 bold uppercase">
+                            <mat-icon>filter_vintage</mat-icon>
+                            Resources management
+                        </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div class="slider-container">
-                        <mat-label>Materials management</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>lens_blur</mat-icon>
+                            Materials
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">5</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Energy source</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>bolt</mat-icon>
+                            Energy
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">4</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Supply chain and distribution</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>device_hub</mat-icon>
+                            Logistics
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">5</span>
                     </div>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                    <mat-panel-title class="font-13 bold uppercase">
-                        Information management
-                    </mat-panel-title>
+                        <mat-panel-title class="font-13 bold uppercase">
+                            <mat-icon>tune</mat-icon>
+                            Information management
+                        </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div class="slider-container">
-                        <mat-label>Data collection</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>sensors</mat-icon>
+                            Sensing
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">3</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Register and data processing</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>memory</mat-icon>
+                            Processing
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">2</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Interface, dashboard and data visualization</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>insights</mat-icon>
+                            Actuator
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">2</span>
                     </div>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                    <mat-panel-title class="font-13 bold uppercase">
-                        Organization management
-                    </mat-panel-title>
+                        <mat-panel-title class="font-13 bold uppercase">
+                            <mat-icon>connect_without_contact</mat-icon>
+                            Organization management
+                        </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div class="slider-container">
-                        <mat-label>Organization model</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>groups</mat-icon>
+                            Organization
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">2</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Impact scale</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>public</mat-icon>
+                            Impact
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">2</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Compliance</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>auto_awesome</mat-icon>
+                            Compliance
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">2</span>
                     </div>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                    <mat-panel-title class="font-13 bold uppercase">
-                        Innovation management
-                    </mat-panel-title>
+                        <mat-panel-title class="font-13 bold uppercase">
+                            <mat-icon>auto_fix_high</mat-icon>
+                            Innovation management
+                        </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <div class="slider-container">
-                        <mat-label>Innovation</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>model_training</mat-icon>
+                            Innovation
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">1</span>
+                    </div>
+
+                    <div class="slider-container" fxLayout="row">
+                        <mat-label fxLayout="row">
+                            <mat-icon>attribution</mat-icon>
+                            <span style="margin-left: 3px;">Intellectual property</span>
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">1</span>
                     </div>
 
                     <div class="slider-container">
-                        <mat-label>Training</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
+                        <mat-label>
+                            <mat-icon>psychology</mat-icon>
+                            Training
+                        </mat-label>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">3</span>
                     </div>
 
-                    <div class="slider-container">
-                        <mat-label>Intelectual property</mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3"></mat-slider>
-                    </div>
                 </mat-expansion-panel>
             
             </mat-accordion>
 
+            <div style="margin-top: 20px;">
+                <button mat-raised-button (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
+                <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledSliders">Save Changes</button>
+            </div>
+
         </div>
 
-        <div fxLayout="column">
-            <div class="centered" style="padding: 20px 0 25px;">
-                <span class="bold font-19">IMI score:</span>
-                <span class="bolder font-22" style="margin-left: 10px;">3.6</span>
-            </div>
+        <div style="margin-top: 40px; margin-right: 50px;">
             <div #chartContainer></div>
         </div>
 

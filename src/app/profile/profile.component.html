@@ -1,14 +1,87 @@
-<div style="margin: 30px auto;">
+<div style="margin: 35px 25px;">
 
     <h1 class="bolder purple-700">
         Company Data
     </h1>
 
-    <div *ngIf="!isUpdateFormVisible">
-        LOL
+    <div class="profile-data-container" *ngIf="!isUpdateFormVisible">
+        <div>
+            <div class="label">
+                <span>Company Name</span>
+            </div>
+            <div class="datum">
+                {{appUser.companyName}}
+            </div>
+        </div>
 
         <div>
-            <button mat-raised-button (click)="isUpdateFormVisible = !isUpdateFormVisible;">Update data</button>
+            <div class="label">
+                <span>Description</span>
+            </div>
+            <div class="datum">
+                {{appUser.description}}
+            </div>
+        </div>
+
+        <div>
+            <div class="label">
+                <span>Website</span>
+            </div>
+            <div class="datum">
+                <span [innerHTML]="appUser.website | linky">{{appUser.website}}</span>
+            </div>
+        </div>
+
+        <div>
+            <div class="label">
+                <span>Phone</span>
+            </div>
+            <div class="datum">
+                {{appUser.phone}}
+            </div>
+        </div>
+
+        <div>
+            <div class="label">
+                <span>External URLs</span>
+            </div>
+            <div class="datum">
+                <ul>
+                    <li class="gray-700" *ngFor="let url of appUser.extraUrls">
+                        <span [innerHTML]="url | linky"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <div class="label">
+                <span>Countries</span>
+            </div>
+            <div class="datum">
+                <ul>
+                    <li class="gray-700" *ngFor="let country of appUser.countries">
+                        <span>{{country}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <div class="label">
+                <span>Industries</span>
+            </div>
+            <div class="datum">
+                <ul>
+                    <li class="gray-700" *ngFor="let industry of appUser.industries">
+                        <span>{{industry}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <button mat-raised-button (click)="isUpdateFormVisible = !isUpdateFormVisible;">Edit data</button>
         </div>
     </div>
 
@@ -108,7 +181,7 @@
 
         <div>
             <button mat-raised-button (click)="isUpdateFormVisible = !isUpdateFormVisible;" style="margin-right: 5px;">Cancel</button>
-            <button mat-raised-button color="accent" type="submit" [disabled]="!(form1.valid)">Done</button>
+            <button mat-raised-button color="accent" type="submit" [disabled]="!(form1.valid)">Save changes</button>
         </div>
     </form>
 
