@@ -17,6 +17,7 @@ import { CompleteSignupComponent } from './complete-signup/complete-signup.compo
 import { ImiVarsComponent } from './imi-vars/imi-vars.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { ProviderDetailDialogComponent } from './provider-detail-dialog/provider-detail-dialog.component';
+import { ProviderServicesComponent } from './provider-services/provider-services.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProviderDetailDialogComponent } from './provider-detail-dialog/provider
     ImiVarsComponent,
     SuggestionsComponent,
     ProviderDetailDialogComponent,
+    ProviderServicesComponent,
 
   ],
   imports: [

@@ -5,6 +5,7 @@
         <div fxFlex style="padding-top: 95px; margin-right: 60px; margin-left: 40px;">
             
             <mat-accordion multi>
+                
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title class="font-13 bold uppercase">
@@ -18,8 +19,8 @@
                             <mat-icon>settings_suggest</mat-icon>
                             Product
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">3</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value1" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value1}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -27,8 +28,8 @@
                             <mat-icon>view_in_ar</mat-icon>
                             Design
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">4</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value2" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value2}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -36,8 +37,8 @@
                             <mat-icon>precision_manufacturing</mat-icon>
                             Fabrication
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">3</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value3" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value3}}</span>
                     </div>
                 </mat-expansion-panel>
 
@@ -54,8 +55,8 @@
                             <mat-icon>lens_blur</mat-icon>
                             Materials
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">5</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value4" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value4}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -63,8 +64,8 @@
                             <mat-icon>bolt</mat-icon>
                             Energy
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">4</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value5" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value5}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -72,8 +73,8 @@
                             <mat-icon>device_hub</mat-icon>
                             Logistics
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">5</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value6" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value6}}</span>
                     </div>
                 </mat-expansion-panel>
 
@@ -90,8 +91,8 @@
                             <mat-icon>sensors</mat-icon>
                             Sensing
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">3</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value7" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value7}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -99,8 +100,8 @@
                             <mat-icon>memory</mat-icon>
                             Processing
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">2</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value8" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value8}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -108,8 +109,8 @@
                             <mat-icon>insights</mat-icon>
                             Actuator
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">2</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value9" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value9}}</span>
                     </div>
                 </mat-expansion-panel>
 
@@ -126,8 +127,8 @@
                             <mat-icon>groups</mat-icon>
                             Organization
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">2</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value10" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value10}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -135,8 +136,8 @@
                             <mat-icon>public</mat-icon>
                             Impact
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">2</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value11" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value11}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -144,8 +145,8 @@
                             <mat-icon>auto_awesome</mat-icon>
                             Compliance
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">2</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value12" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value12}}</span>
                     </div>
                 </mat-expansion-panel>
 
@@ -162,8 +163,8 @@
                             <mat-icon>model_training</mat-icon>
                             Innovation
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">1</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value13" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value13}}</span>
                     </div>
 
                     <div class="slider-container" fxLayout="row">
@@ -171,8 +172,8 @@
                             <mat-icon>attribution</mat-icon>
                             <span style="margin-left: 3px;">Intellectual property</span>
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">1</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value14" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value14}}</span>
                     </div>
 
                     <div class="slider-container">
@@ -180,8 +181,8 @@
                             <mat-icon>psychology</mat-icon>
                             Training
                         </mat-label>
-                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" value="3" [disabled]="disabledSliders"></mat-slider>
-                        <span class="score-slider">3</span>
+                        <mat-slider thumbLabel tickInterval="1" min="0" max="5" step="1" [(ngModel)]="sliderValues.value15" [disabled]="disabledSliders"></mat-slider>
+                        <span class="score-slider">{{sliderValues.value15}}</span>
                     </div>
 
                 </mat-expansion-panel>

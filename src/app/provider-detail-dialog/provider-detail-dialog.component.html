@@ -31,17 +31,34 @@
         <a href="mailto: abc@example.com" class="gray-700" style="margin-left: 5px;">abc@example.com</a>
     </div>
 
-    <div>
-        countries
+    <div style="margin-top: 15px;">
+        <div class="gray-700" style="width: 150px;">Countries</div>
+        <div>
+            <ul class="gray-700">
+                <li>Peru</li>
+                <li>United States</li>
+            </ul>
+        </div>
     </div>
 
-    <div>
-        industries
+    <div style="margin-top: 15px;">
+        <div class="gray-700" style="width: 150px;">Industries</div>
+        <div>
+            <ul class="gray-700">
+                <li>IT</li>
+                <li>Biomedical</li>
+            </ul>
+        </div>
     </div>
     
-    <div>
-        External URLs
+    <div style="margin-top: 15px;">
+        <div class="gray-700" style="width: 150px;">External URLs</div>
+        <div>
+            <ul class="gray-700">
+                <li><span [innerHTML]="'www.google.com' | linky"></span></li>
+                <li><span [innerHTML]="'www.facebook.com' | linky"></span></li>
+            </ul>
+        </div>
     </div>
-
 
 </mat-dialog-content>

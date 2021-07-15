@@ -194,12 +194,12 @@ export class CompleteSignupComponent implements OnInit {
           concatMap(user => {
             let newClient = this.getClientObject();
             newClient.email = user!.email!;
-            return this.clientService.createClient(newClient);
+            return this.clientService.create(newClient);
           })
         )
         .subscribe(result => {
           if (result) {
-            this.sharedService.nextAppUser(result);
+            this.sharedService.nextAppUser(result as Client);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('Ocurrió un error durante el proceso. Intente nuevamente.', 'ok', {
@@ -213,12 +213,12 @@ export class CompleteSignupComponent implements OnInit {
           concatMap(user => {
             let newProvider = this.getProviderObject();
             newProvider.email = user!.email!;
-            return this.providerService.createProvider(newProvider);
+            return this.providerService.create(newProvider);
           })
         )
         .subscribe(result => {
           if (result) {
-            this.sharedService.nextAppUser(result);
+            this.sharedService.nextAppUser(result as Provider);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('Ocurrió un error durante el proceso. Intente nuevamente.', 'ok', {

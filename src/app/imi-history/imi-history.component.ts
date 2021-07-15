@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { DimensionsType, Imi } from '../models/types';
 import * as d3 from "d3";
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-imi-history',
@@ -20,7 +21,10 @@ export class ImiHistoryComponent implements OnInit, AfterViewInit {
   data: any[] = [];
   slices: any[] = [];
 
-  constructor() {
+  constructor(
+    private renderer: Renderer2,
+    private sharedService: SharedService,
+  ) {
     this.dimensions = {
       marginTop: 50,
       marginRight: 100,
@@ -37,6 +41,13 @@ export class ImiHistoryComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.sharedService.appUser$
+      .subscribe(appUser => {
+        this.data = this.processData(appUser.imis);
+        this.createChart();
+      });
+
+      /*
     let result: any[] = [
       {dateTime: new Date('2020-10-01'), vars: new Map([[1, 3], [2, 2], [3, 4], [4, 4], [5, 2], [6, 1] ,[7, 5], [8, 4], [9, 4], [10, 3], [11, 4], [12, 5], [13, 2], [14, 3], [15, 2]])},
       {dateTime: new Date('2020-11-01'), vars: new Map([[1, 1], [2, 1], [3, 1], [4, 2], [5, 2], [6, 2] ,[7, 3], [8, 3], [9, 3], [10, 1], [11, 3], [12, 5], [13, 5], [14, 4], [15, 5]])},
@@ -50,16 +61,21 @@ export class ImiHistoryComponent implements OnInit, AfterViewInit {
       {dateTime: new Date('2021-07-01'), vars: new Map([[1, 5], [2, 5], [3, 5], [4, 4], [5, 5], [6, 4] ,[7, 5], [8, 5], [9, 5], [10, 3], [11, 3], [12, 2], [13, 4], [14, 3], [15, 4]])},
     ];
     this.data = result;
-    this.slices = this.processData(result);
+    this.slices = this.processData(result);*/
     //console.log(this.data[0]);
     //console.log(this.data[1]);
   }
 
   ngAfterViewInit(): void {
-    this.createChart();
+    //this.createChart();
   }
 
   createChart(): void {
+    if (this.data.length === 0) {
+      this.renderer.setProperty(this.chartContainer.nativeElement, 'innerHTML', '<p class="gray-700 centered" style="width: 400px; margin-top: 100px;">No data to show.</p>');
+      return;
+    }
+
     // SVG container
     this.wrapper = d3.select(this.chartContainer.nativeElement)
       .append("svg")

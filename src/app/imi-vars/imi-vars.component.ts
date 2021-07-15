@@ -1,6 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { DimensionsType } from '../models/types';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { DimensionsType, Imi } from '../models/types';
 import * as d3 from "d3";
+import { SharedService } from '../services/shared.service';
+import { ProviderService } from '../services/provider.service';
+import { Util } from '../utils/util';
+import { ClientService } from '../services/client.service';
 
 @Component({
   selector: 'app-imi-vars',
@@ -9,9 +13,16 @@ import * as d3 from "d3";
 })
 export class ImiVarsComponent implements OnInit, AfterViewInit {
 
-  disabledSliders: boolean = true;
+  appUser: any;
 
-  data = [
+  disabledSliders: boolean = true;
+  sliderValues = {value1: 0, value2: 0, value3: 0, value4: 0, value5: 0, value6: 0, value7: 0, value8: 0,
+                  value9:0, value10:0, value11: 0, value12: 0, value13: 0, value14: 0, value15: 0};
+
+  data: any[] = [];
+  lastImi?: Imi;
+
+  /*data = [
     [ 
       {axis: "Product", value: 3},
       {axis: "Resources", value: 2},
@@ -31,7 +42,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       {axis: "Organization", value: 2},
       {axis: "Innovation", value: 3}	
     ]
-  ];
+  ];*/
 
   @ViewChild('chartContainer', {static: true}) 
   chartContainer!: ElementRef;
@@ -39,7 +50,12 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
   wrapper: any;
   bounds: any;
 
-  constructor() {
+  constructor(
+    private renderer: Renderer2,
+    private sharedService: SharedService,
+    private providerService: ProviderService,
+    private clientService: ClientService,
+  ) {
     this.dimensions = {
       marginTop: 50,
       marginRight: 50,
@@ -55,18 +71,114 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sharedService.appUser$
+      .subscribe(appUser => {
+        console.log(appUser);
+        this.appUser = appUser;
+        this.updateVarsAndData();
+        this.createChart();
+      });
+  }
 
   ngAfterViewInit(): void {
-    this.createChart();
+    
+  }
+
+  updateVarsAndData() {
+    if (!this.appUser.imis || this.appUser.imis.length === 0) { 
+      return; 
+    }
+
+    // create imis vars as map
+    /*for (let i = 0; i < appUser.imis.length; i++) {
+      let tempMap = new Map();
+      for (let [key, value] of Object.entries(appUser.imis[i].vars)) {
+        tempMap.set(+key, value);
+      }
+      appUser.imis[i].vars = tempMap;
+    } */
+
+    this.lastImi = this.appUser.imis[this.appUser.imis.length - 1];
+    this.sliderValues.value1 = this.lastImi!.vars.get(1)!;
+    this.sliderValues.value2 = this.lastImi!.vars.get(2)!;
+    this.sliderValues.value3 = this.lastImi!.vars.get(3)!;
+    this.sliderValues.value4 = this.lastImi!.vars.get(4)!;
+    this.sliderValues.value5 = this.lastImi!.vars.get(5)!;
+    this.sliderValues.value6 = this.lastImi!.vars.get(6)!;
+    this.sliderValues.value7 = this.lastImi!.vars.get(7)!;
+    this.sliderValues.value8 = this.lastImi!.vars.get(8)!;
+    this.sliderValues.value9 = this.lastImi!.vars.get(9)!;
+    this.sliderValues.value10 = this.lastImi!.vars.get(10)!;
+    this.sliderValues.value11 = this.lastImi!.vars.get(11)!;
+    this.sliderValues.value12 = this.lastImi!.vars.get(12)!;
+    this.sliderValues.value13 = this.lastImi!.vars.get(13)!;
+    this.sliderValues.value14 = this.lastImi!.vars.get(14)!;
+    this.sliderValues.value15 = this.lastImi!.vars.get(15)!;
+
+    // array of axes for last imi
+    const big5Graph = [
+      {axis: Util.INTEGER_TO_NAME_MAP.get(1), value: (this.lastImi!.vars.get(1)! + this.lastImi!.vars.get(2)! + this.lastImi!.vars.get(3)!) / 3},
+      {axis: Util.INTEGER_TO_NAME_MAP.get(2), value: (this.lastImi!.vars.get(4)! + this.lastImi!.vars.get(5)! + this.lastImi!.vars.get(6)!) / 3},
+      {axis: Util.INTEGER_TO_NAME_MAP.get(3), value: (this.lastImi!.vars.get(7)! + this.lastImi!.vars.get(8)! + this.lastImi!.vars.get(9)!) / 3},
+      {axis: Util.INTEGER_TO_NAME_MAP.get(4), value: (this.lastImi!.vars.get(10)! + this.lastImi!.vars.get(11)! + this.lastImi!.vars.get(12)!) / 3},
+      {axis: Util.INTEGER_TO_NAME_MAP.get(5), value: (this.lastImi!.vars.get(13)! + this.lastImi!.vars.get(14)! + this.lastImi!.vars.get(15)!) / 3}
+    ];
+    this.data = [big5Graph];
   }
 
   saveChanges(): void {
+    let mapVars = new Map([
+      [1, this.sliderValues.value1],
+      [2, this.sliderValues.value2],
+      [3, this.sliderValues.value3],
+      [4, this.sliderValues.value4],
+      [5, this.sliderValues.value5],
+      [6, this.sliderValues.value6],
+      [7, this.sliderValues.value7],
+      [8, this.sliderValues.value8],
+      [9, this.sliderValues.value9],
+      [10, this.sliderValues.value10],
+      [11, this.sliderValues.value11],
+      [12, this.sliderValues.value12],
+      [13, this.sliderValues.value13],
+      [14, this.sliderValues.value14],
+      [15, this.sliderValues.value15]
+    ]);
+
+    this.appUser.imis[this.appUser.imis.length - 1].vars = mapVars;
+
+    if (this.appUser.services) { // is provider
+      this.providerService.updateImi(this.appUser.id, mapVars)
+        .subscribe(appUser => {
+          this.updateVarsAndData();
+          this.createChart(); // redraw radar chart
+          console.log("Updated!");
+        });
+
+    } else { // is client
+      this.clientService.updateImi(this.appUser.id, mapVars)
+        .subscribe(appUser => {
+          this.updateVarsAndData();
+          this.createChart(); // redraw radar chart
+          console.log("Updated!");
+        });
+    }
     
     this.disabledSliders = true;
   }
 
   createChart(): void {
+    if (this.data.length === 0) {
+      this.renderer.setProperty(this.chartContainer.nativeElement, 'innerHTML', '<p class="gray-700 centered" style="width: 370px; margin-top: 100px;">No data to show.</p>');
+      return;
+    }
+
+    // remove any pre-existing chart
+    d3.select(this.chartContainer.nativeElement)
+      .selectChild('svg')
+      .remove();
+
     const color = d3.scaleOrdinal()
 				.range(["#EDC951","#CC333F","#00A0B0"]);
 				
@@ -77,7 +189,6 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
 			  levels: 5,
 			  roundStrokes: true,
 			  color: color,
-
         labelFactor: 1.25, 	// How much farther than the radius of the outer circle should the labels be placed
         wrapWidth: 60, 		// The number of pixels after which a label needs to be given a new line
         opacityArea: 0.35, 	// The opacity of the area of the blob

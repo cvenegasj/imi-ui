@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
-import { Observable, forkJoin } from 'rxjs';
-import { concatMap, map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { AuthService } from '@auth0/auth0-angular';
 import { ClientService } from '../services/client.service';
@@ -176,7 +176,32 @@ export class ProfileComponent implements OnInit {
   }
 
   onSaveData(): void {
-    
+    this.appUser.companyName = this.formGroup.get('firstCtrl')!.value;
+    this.appUser.description = this.formGroup.get('secondCtrl')!.value;
+    this.appUser.phone = this.formGroup.get('thirdCtrl')!.value;
+    this.appUser.website = this.formGroup.get('fourthCtrl')!.value;
+    this.appUser.extraUrls = this.urls;
+    this.appUser.countries = this.selectedCountries;
+    this.appUser.industries = this.selectedIndustries;
+
+    if (this.appUser.services) { // is provider
+      this.providerService.update(this.appUser)
+        .subscribe(res => {
+          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+            duration: 2000,
+          });
+          this.isUpdateFormVisible = false;
+        });
+
+    } else { // is client
+      this.clientService.update(this.appUser)
+        .subscribe(res => {
+          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+            duration: 2000,
+          });
+          this.isUpdateFormVisible = false;
+        });
+    }
   }
 
 }

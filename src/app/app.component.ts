@@ -8,6 +8,7 @@ import { forkJoin } from 'rxjs';
 import { ClientService } from './services/client.service';
 import { ProviderService } from './services/provider.service';
 import { SharedService } from './services/shared.service';
+import { Client, Provider } from './models/types';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,6 @@ import { SharedService } from './services/shared.service';
 export class AppComponent {
   
   title = 'IMI';
-  //isLoading: boolean = true;
 
   constructor(
     @Inject(DOCUMENT) public document: Document,
@@ -29,21 +29,44 @@ export class AppComponent {
     ) {
       this.auth.user$
         .subscribe(user => {
-          forkJoin({
-            client: this.clientService.findClient(user!.email!),
-            provider: this.providerService.findProvider(user!.email!),
-          })
-          .subscribe(({client, provider}) => {
-            //this.isLoading = false;
-            if (!client && !provider) { 
-              this.router.navigate(['complete-signup']); 
-              console.log("New user!"); 
-            } else { 
-              let appUser = client ? client : provider;
-              this.sharedService.nextAppUser(appUser);
-            }
-          });
+          if (user) {
+            forkJoin({
+              client: this.clientService.find(user!.email!),
+              provider: this.providerService.find(user!.email!),
+            })
+            .subscribe(({client, provider}) => {
+              if (!client && !provider) { 
+                this.router.navigate(['complete-signup']); 
+                console.log("New user!"); 
+              } else { 
+                let appUser: any = client ? client as Client : provider as Provider;
+                //console.log(appUser);
+                
+                // provider's services
+                if (provider) { // manual mapping from JSON to Map object
+                  let mapServices = new Map();
+                  for (let [key, value] of Object.entries(provider.services)) {
+                    mapServices.set(+key, value);
+                  }
+                  appUser.services = mapServices;
+                }
+                // imis
+                for (let i = 0; i < appUser.imis.length; i++) {
+                  let tempMap = new Map();
+                  for (let [key, value] of Object.entries(appUser.imis[i].vars)) {
+                    tempMap.set(+key, value);
+                  }
+                  appUser.imis[i].vars = tempMap;
+                }
+                this.sharedService.nextAppUser(appUser);
+              }
+            });
+          } else {
+            this.auth.loginWithRedirect();
+          }
         });
   }
+
+  
 
 }

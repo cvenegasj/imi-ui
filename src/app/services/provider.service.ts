@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { Provider } from '../models/types';
+import { Imi, Provider } from '../models/types';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +19,7 @@ export class ProviderService {
     ) { }
 
     // create
-    createProvider(data: Provider): Observable<Provider> {
+    create(data: Provider): Observable<Provider> {
         let API_URL = `${this.apiUrl}/providers`;
         return this.http.post<Provider>(API_URL, data)
             .pipe(
@@ -28,9 +28,36 @@ export class ProviderService {
     }
 
     // find
-    findProvider(email: string): Observable<Provider> {
+    find(email: string): Observable<Provider> {
         let API_URL = `${this.apiUrl}/providers/${email}`;
         return this.http.get<Provider>(API_URL);
+    }
+
+    // update provider
+    update(p: Provider): Observable<Provider> {
+        let API_URL = `${this.apiUrl}/providers/${p.id}`;
+        return this.http.put<Provider>(API_URL, p, {headers: this.headers})
+            .pipe(
+                catchError(this.error)
+            );
+    }
+
+    // update provider's services
+    updateServices(idProvider: string, services: Map<number, string[]>): Observable<Provider> {
+        let API_URL = `${this.apiUrl}/providers/${idProvider}/update-services`;
+        return this.http.put<Provider>(API_URL, Object.fromEntries(services), {headers: this.headers})
+            .pipe(
+                catchError(this.error)
+            );
+    }
+
+    // update provider's imi
+    updateImi(idProvider: string, vars: Map<number, number>): Observable<Provider> {
+        let API_URL = `${this.apiUrl}/providers/${idProvider}/update-imi`;
+        return this.http.put<Provider>(API_URL, Object.fromEntries(vars), {headers: this.headers})
+            .pipe(
+                catchError(this.error)
+            );
     }
 
     // Handle Errors 

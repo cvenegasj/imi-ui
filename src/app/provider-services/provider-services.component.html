@@ -1,0 +1,546 @@
+<mat-card class="card-1"> 
+
+    <mat-card-content style="margin: 20px 40px; ">
+
+        <mat-accordion multi class="edit-services">
+            
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="title-dim">
+                        <mat-icon>design_services</mat-icon>
+                        Product management
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">settings_suggest</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Product</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list1>
+                                <mat-chip *ngFor="let service of selectedServices1"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService1(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list1Input 
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list1"
+                                        [matAutocomplete]="autoComplete1">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete1="matAutocomplete" (optionSelected)="selectService1($event)">
+                                <mat-option *ngFor="let service of services1" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">view_in_ar</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Design</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list2>
+                                <mat-chip *ngFor="let service of selectedServices2"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService2(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list2Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list2"
+                                        [matAutocomplete]="autoComplete2">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete2="matAutocomplete" (optionSelected)="selectService2($event)">
+                                <mat-option *ngFor="let service of services2" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">precision_manufacturing</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Fabrication</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list3>
+                                <mat-chip *ngFor="let service of selectedServices3"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService3(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list3Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list3"
+                                        [matAutocomplete]="autoComplete3">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete3="matAutocomplete" (optionSelected)="selectService3($event)">
+                                <mat-option *ngFor="let service of services3" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="title-dim">
+                        <mat-icon>filter_vintage</mat-icon>
+                        Resources management
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">lens_blur</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Materials</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list4>
+                                <mat-chip *ngFor="let service of selectedServices4"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService4(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list4Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list4"
+                                        [matAutocomplete]="autoComplete4">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete4="matAutocomplete" (optionSelected)="selectService4($event)">
+                                <mat-option *ngFor="let service of services4" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">bolt</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Energy</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list5>
+                                <mat-chip *ngFor="let service of selectedServices5"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService5(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list5Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list5"
+                                        [matAutocomplete]="autoComplete5">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete5="matAutocomplete" (optionSelected)="selectService5($event)">
+                                <mat-option *ngFor="let service of services5" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">device_hub</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Logistics</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list6>
+                                <mat-chip *ngFor="let service of selectedServices6"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService6(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list6Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list6"
+                                        [matAutocomplete]="autoComplete6">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete6="matAutocomplete" (optionSelected)="selectService6($event)">
+                                <mat-option *ngFor="let service of services6" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="title-dim">
+                        <mat-icon>tune</mat-icon>
+                        Information management
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">sensors</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Sensing</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list7>
+                                <mat-chip *ngFor="let service of selectedServices7"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService7(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list7Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list7"
+                                        [matAutocomplete]="autoComplete7">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete7="matAutocomplete" (optionSelected)="selectService7($event)">
+                                <mat-option *ngFor="let service of services7" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">memory</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Processing</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list8>
+                                <mat-chip *ngFor="let service of selectedServices8"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService8(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list8Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list8"
+                                        [matAutocomplete]="autoComplete8">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete8="matAutocomplete" (optionSelected)="selectService8($event)">
+                                <mat-option *ngFor="let service of services8" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">insights</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Actuator</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list9>
+                                <mat-chip *ngFor="let service of selectedServices9"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService9(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list9Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list9"
+                                        [matAutocomplete]="autoComplete9">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete9="matAutocomplete" (optionSelected)="selectService9($event)">
+                                <mat-option *ngFor="let service of services9" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="title-dim">
+                        <mat-icon>connect_without_contact</mat-icon>
+                        Organization management
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">groups</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Organization</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list10>
+                                <mat-chip *ngFor="let service of selectedServices10"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService10(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list10Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list10"
+                                        [matAutocomplete]="autoComplete10">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete10="matAutocomplete" (optionSelected)="selectService10($event)">
+                                <mat-option *ngFor="let service of services10" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">public</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Impact</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list11>
+                                <mat-chip *ngFor="let service of selectedServices11"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService11(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list11Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list11"
+                                        [matAutocomplete]="autoComplete11">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete11="matAutocomplete" (optionSelected)="selectService11($event)">
+                                <mat-option *ngFor="let service of services11" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">auto_awesome</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Compliance</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list12>
+                                <mat-chip *ngFor="let service of selectedServices12"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService12(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list12Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list12"
+                                        [matAutocomplete]="autoComplete12">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete12="matAutocomplete" (optionSelected)="selectService12($event)">
+                                <mat-option *ngFor="let service of services12" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="title-dim">
+                        <mat-icon>auto_fix_high</mat-icon>
+                        Innovation management
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">model_training</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Innovation</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list13>
+                                <mat-chip *ngFor="let service of selectedServices13"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService13(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list13Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list13"
+                                        [matAutocomplete]="autoComplete13">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete13="matAutocomplete" (optionSelected)="selectService13($event)">
+                                <mat-option *ngFor="let service of services13" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">attribution</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Intellectual Property</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list14>
+                                <mat-chip *ngFor="let service of selectedServices14"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService14(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list14Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list14"
+                                        [matAutocomplete]="autoComplete14">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete14="matAutocomplete" (optionSelected)="selectService14($event)">
+                                <mat-option *ngFor="let service of services14" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="show-subdim" fxLayout="row">
+                    <div class="subdim-label">
+                        <mat-icon color="primary">psychology</mat-icon>
+                        <span style="position: relative; top: -7px; margin-left: 5px;">Training</span>
+                    </div>
+            
+                    <div class="subdim-services" fxFlex>
+                        <mat-form-field appearance="fill">
+                            <mat-chip-list #list15>
+                                <mat-chip *ngFor="let service of selectedServices15"
+                                        color="accent"
+                                        [removable]="!disabledInputs" 
+                                        (removed)="removeService15(service)">
+                                    {{service}}
+                                    <mat-icon matChipRemove *ngIf="!disabledInputs">cancel</mat-icon>
+                                </mat-chip>
+                                <input #list15Input
+                                        [readonly]="disabledInputs"
+                                        style="flex: 1 0 40px;"
+                                        [matChipInputFor]="list15"
+                                        [matAutocomplete]="autoComplete15">
+                            </mat-chip-list>
+            
+                            <mat-autocomplete #autoComplete15="matAutocomplete" (optionSelected)="selectService15($event)">
+                                <mat-option *ngFor="let service of services15" [value]="service">
+                                  {{service}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <div style="margin-top: 20px;">
+            <button mat-raised-button (click)="disabledInputs = !disabledInputs;" *ngIf="disabledInputs">Edit values</button>
+            <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledInputs">Save Changes</button>
+        </div>
+    
+    </mat-card-content>
+
+</mat-card>

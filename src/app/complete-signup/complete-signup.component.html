@@ -5,8 +5,17 @@
             <div class="centered" style="margin-top: 20px;">
                 <p class="font-20">Sign up as</p>
 
-                <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="setUserType('client')">Client Company</button>
-                <button mat-raised-button color="primary" (click)="setUserType('provider')">Provider Company</button>
+                <button mat-raised-button color="primary" style="margin-right: 10px; height: 90px; width: 160px;" (click)="setUserType('client')">
+                    <mat-icon>verified</mat-icon>
+                    <br />
+                    Company
+                </button>
+                
+                <button mat-raised-button color="primary" style="height: 90px; width: 160px;" (click)="setUserType('provider')">
+                    <mat-icon>star_rate</mat-icon>
+                    <br />
+                    Tech Provider
+                </button>
             </div>
         </mat-step>
 
@@ -29,7 +38,7 @@
                 <div>
                     <mat-form-field appearance="fill" style="width: 300px;">
                         <mat-label>Contact phone</mat-label>
-                        <input matInput type="tel" placeholder="Phone number" formControlName="thirdCtrl">
+                        <input matInput type="tel" placeholder="Only numbers with international prefix" formControlName="thirdCtrl">
                     </mat-form-field>
                 </div>
             

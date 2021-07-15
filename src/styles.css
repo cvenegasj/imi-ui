@@ -443,3 +443,27 @@ mat-button-toggle.toggle-6 {
     color: white;
     background-color: #f77f00;
 }
+
+mat-accordion.edit-services mat-panel-title.title-dim {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 17px;
+}
+
+mat-accordion.edit-services div.show-subdim div.subdim-label {
+    width: 150px;
+}
+
+mat-accordion.edit-services div.show-subdim div.subdim-services {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+mat-accordion.edit-services div.show-subdim {
+    margin-left: 35px;
+}
+
+mat-accordion.edit-services div.show-subdim div.subdim-services mat-form-field {
+    width: 100%;
+}

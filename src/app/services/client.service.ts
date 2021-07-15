@@ -19,7 +19,7 @@ export class ClientService {
     ) { }
 
     // create
-    createClient(data: Client): Observable<Client> {
+    create(data: Client): Observable<Client> {
         let API_URL = `${this.apiUrl}/clients`;
         return this.http.post<Client>(API_URL, data)
             .pipe(
@@ -28,9 +28,27 @@ export class ClientService {
     }
 
     // find
-    findClient(email: string): Observable<Client> {
+    find(email: string): Observable<Client> {
         let API_URL = `${this.apiUrl}/clients/${email}`;
         return this.http.get<Client>(API_URL);
+    }
+
+    // update client
+    update(p: Client): Observable<Client> {
+        let API_URL = `${this.apiUrl}/clients/${p.id}`;
+        return this.http.put<Client>(API_URL, p, {headers: this.headers})
+            .pipe(
+                catchError(this.error)
+            );
+    }
+
+    // update client's imi
+    updateImi(idClient: string, vars: Map<number, number>): Observable<Client> {
+        let API_URL = `${this.apiUrl}/clients/${idClient}/update-imi`;
+        return this.http.put<Client>(API_URL, Object.fromEntries(vars), {headers: this.headers})
+            .pipe(
+                catchError(this.error)
+            );
     }
 
     // Handle Errors 
