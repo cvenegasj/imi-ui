@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 import { DimensionsType, Imi } from '../models/types';
 import * as d3 from "d3";
 import { SharedService } from '../services/shared.service';
@@ -12,6 +12,8 @@ import { ClientService } from '../services/client.service';
   styleUrls: ['./imi-vars.component.css']
 })
 export class ImiVarsComponent implements OnInit, AfterViewInit {
+
+  @Output() onImiRecalculated = new EventEmitter<number>();
 
   appUser: any;
 
@@ -76,7 +78,8 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       .subscribe(appUser => {
         console.log(appUser);
         this.appUser = appUser;
-        this.updateVarsAndData();
+        const imiScore = this.updateVarsAndData();
+        this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
         this.createChart();
       });
   }
@@ -85,9 +88,9 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     
   }
 
-  updateVarsAndData() {
+  updateVarsAndData(): number {
     if (!this.appUser.imis || this.appUser.imis.length === 0) { 
-      return; 
+      return 0; 
     }
 
     // create imis vars as map
@@ -125,6 +128,13 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       {axis: Util.INTEGER_TO_NAME_MAP.get(5), value: (this.lastImi!.vars.get(13)! + this.lastImi!.vars.get(14)! + this.lastImi!.vars.get(15)!) / 3}
     ];
     this.data = [big5Graph];
+
+    //compute imi score
+    let score = 0;
+    for (let obj of big5Graph) {
+      score += obj.value;
+    }
+    return score / 5;
   }
 
   saveChanges(): void {
@@ -151,7 +161,8 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     if (this.appUser.services) { // is provider
       this.providerService.updateImi(this.appUser.id, mapVars)
         .subscribe(appUser => {
-          this.updateVarsAndData();
+          const imiScore = this.updateVarsAndData();
+          this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.createChart(); // redraw radar chart
           console.log("Updated!");
         });
@@ -159,7 +170,8 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     } else { // is client
       this.clientService.updateImi(this.appUser.id, mapVars)
         .subscribe(appUser => {
-          this.updateVarsAndData();
+          const imiScore = this.updateVarsAndData();
+          this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.createChart(); // redraw radar chart
           console.log("Updated!");
         });

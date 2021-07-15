@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { ClientService } from '../services/client.service';
-import { ProviderService } from '../services/provider.service';
 
-import { forkJoin } from 'rxjs';
 import { SharedService } from '../services/shared.service';
-import { Client, Imi, Provider } from '../models/types';
+import { Imi } from '../models/types';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +16,8 @@ export class DashboardComponent implements OnInit {
   imiScore: number = 0;
 
   constructor(
-    private router: Router,
-    private clientService: ClientService,
-    private providerService: ProviderService,
     public sharedService: SharedService,
-    public auth: AuthService
+    public auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +41,10 @@ export class DashboardComponent implements OnInit {
       sum += value;
     }
     return sum / n;
+  }
+
+  setImiScore(score: number): void {
+    this.imiScore = score;
   }
 
 }
