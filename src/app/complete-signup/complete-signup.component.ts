@@ -197,9 +197,10 @@ export class CompleteSignupComponent implements OnInit {
             return this.clientService.create(newClient);
           })
         )
-        .subscribe(result => {
-          if (result) {
-            this.sharedService.nextAppUser(result as Client);
+        .subscribe(c => {
+          if (c) {
+            //console.log(result);
+            this.sharedService.nextAppUser(c as Client);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('Ocurrió un error durante el proceso. Intente nuevamente.', 'ok', {
@@ -216,9 +217,17 @@ export class CompleteSignupComponent implements OnInit {
             return this.providerService.create(newProvider);
           })
         )
-        .subscribe(result => {
-          if (result) {
-            this.sharedService.nextAppUser(result as Provider);
+        .subscribe(p => {
+          if (p) {
+            //console.log(p);
+            // provider's services manual mapping
+            let mapServices: Map<number, string[]> = new Map();
+            for (let [key, value] of Object.entries(p.services)) {
+              mapServices.set(+key, value);
+            }
+            p.services = mapServices;
+      
+            this.sharedService.nextAppUser(p as Provider);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('Ocurrió un error durante el proceso. Intente nuevamente.', 'ok', {

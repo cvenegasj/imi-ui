@@ -44,7 +44,7 @@ export class AppComponent {
                 
                 // provider's services
                 if (provider) { // manual mapping from JSON to Map object
-                  let mapServices = new Map();
+                  let mapServices: Map<number, string[]> = new Map();
                   for (let [key, value] of Object.entries(provider.services)) {
                     mapServices.set(+key, value);
                   }

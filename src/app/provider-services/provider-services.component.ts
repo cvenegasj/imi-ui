@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { ProviderService } from '../services/provider.service';
 import { SharedService } from '../services/shared.service';
 
@@ -50,6 +52,7 @@ export class ProviderServicesComponent implements OnInit {
   constructor(
     public sharedService: SharedService,
     private providerService: ProviderService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -76,9 +79,8 @@ export class ProviderServicesComponent implements OnInit {
   }
 
   saveChanges(): void {
-    this.disabledInputs = true;
-
     let userServices: Map<number, string[]> = new Map();
+
     userServices.set(1, this.selectedServices1);
     userServices.set(2, this.selectedServices2);
     userServices.set(3, this.selectedServices3);
@@ -96,7 +98,12 @@ export class ProviderServicesComponent implements OnInit {
     userServices.set(15, this.selectedServices15);
 
     this.providerService.updateServices(this.appUser.id, userServices)
-      .subscribe();
+      .subscribe(res => {
+        this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+          duration: 2000,
+        });
+        this.disabledInputs = true;
+      });
   }
 
   removeService1(service: string): void {

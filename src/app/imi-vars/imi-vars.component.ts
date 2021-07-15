@@ -6,6 +6,8 @@ import { ProviderService } from '../services/provider.service';
 import { Util } from '../utils/util';
 import { ClientService } from '../services/client.service';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-imi-vars',
   templateUrl: './imi-vars.component.html',
@@ -57,6 +59,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     private sharedService: SharedService,
     private providerService: ProviderService,
     private clientService: ClientService,
+    private _snackBar: MatSnackBar,
   ) {
     this.dimensions = {
       marginTop: 50,
@@ -76,10 +79,10 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.sharedService.appUser$
       .subscribe(appUser => {
-        console.log(appUser);
+        //console.log(appUser);
         this.appUser = appUser;
         const imiScore = this.updateVarsAndData();
-        this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
+        //this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
         this.createChart();
       });
   }
@@ -88,6 +91,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     
   }
 
+  // returns imi score
   updateVarsAndData(): number {
     if (!this.appUser.imis || this.appUser.imis.length === 0) { 
       return 0; 
@@ -103,6 +107,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     } */
 
     this.lastImi = this.appUser.imis[this.appUser.imis.length - 1];
+
     this.sliderValues.value1 = this.lastImi!.vars.get(1)!;
     this.sliderValues.value2 = this.lastImi!.vars.get(2)!;
     this.sliderValues.value3 = this.lastImi!.vars.get(3)!;
@@ -156,7 +161,9 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       [15, this.sliderValues.value15]
     ]);
 
-    this.appUser.imis[this.appUser.imis.length - 1].vars = mapVars;
+    let newImi = new Imi();
+    newImi.vars = mapVars;
+    this.appUser.imis.push(newImi); // corregir esto!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     if (this.appUser.services) { // is provider
       this.providerService.updateImi(this.appUser.id, mapVars)
@@ -164,6 +171,10 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.createChart(); // redraw radar chart
+
+          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+            duration: 2000,
+          });
           console.log("Updated!");
         });
 
@@ -173,6 +184,10 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.createChart(); // redraw radar chart
+
+          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+            duration: 2000,
+          });
           console.log("Updated!");
         });
     }
@@ -402,7 +417,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
           tooltip
             .attr('x', newX)
             .attr('y', newY)
-            .text(d.value)
+            .text(d.value.toFixed(2))
             .transition().duration(200)
             .style('opacity', 1);
         })

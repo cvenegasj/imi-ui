@@ -76,7 +76,6 @@ export class ProfileComponent implements OnInit {
     public sharedService: SharedService,
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
-    private router: Router,
     ) {
       this.formGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
