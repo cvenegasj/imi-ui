@@ -36,7 +36,7 @@ export class Provider {
     imis: Imi[] = [];
     services: Map<number, string[]> = new Map();
 
-    calculateIMI(): number {
+    /*calculateIMI(): number {
         if (this.imis.length === 0) { return 0; }
         const lastImi = this.imis[this.imis.length - 1];
         const n = lastImi.vars.size;
@@ -46,7 +46,7 @@ export class Provider {
             sum += value;
         }
         return sum / n;
-    }
+    } */
 }
 
 export class Imi {

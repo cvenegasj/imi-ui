@@ -2,7 +2,7 @@
 
     <mat-card-content fxLayout="row">
     
-        <div fxFlex style="padding-top: 95px; margin-right: 60px; margin-left: 40px;">
+        <div fxFlex style="padding-top: 75px; margin-right: 60px; margin-left: 40px;">
             
             <mat-accordion multi>
                 
@@ -190,14 +190,66 @@
             </mat-accordion>
 
             <div style="margin-top: 20px;">
-                <button mat-raised-button (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
+                <button mat-button color="accent" (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
                 <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledSliders">Save Changes</button>
             </div>
 
         </div>
 
-        <div style="margin-top: 40px; margin-right: 50px;">
+        <div style="margin-top: 30px; margin-right: 50px;">
+            
             <div #chartContainer></div>
+            
+            <div style="margin: 0 0 10px 140px;">
+                
+                <mat-form-field appearance="fill" style="width: 220px;">
+                    <mat-label>Show country IMI</mat-label>
+
+                    <mat-chip-list #countryList>
+                        <mat-chip *ngFor="let country of selectedCountries" [removable]="true" (removed)="removeCountry()">
+                            {{country}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+
+                    <input #countryInput matInput
+                            placeholder="Type country"
+                            [matChipInputFor]="countryList"
+                            [formControl]="myControl1"
+                            [matAutocomplete]="autoCountries">
+
+                    <mat-autocomplete #autoCountries="matAutocomplete" (optionSelected)="selectCountry($event)">
+                        <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                            {{country}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 220px;">
+                    <mat-label>Show industry sector IMI</mat-label>
+
+                    <mat-chip-list #industryList>
+                        <mat-chip *ngFor="let industry of selectedIndustries" [removable]="true" (removed)="removeIndustry()">
+                            {{industry}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+
+                    <input #industryInput matInput
+                            placeholder="Type industry sector"
+                            [matChipInputFor]="industryList"
+                            [formControl]="myControl2"
+                            [matAutocomplete]="autoIndustries">
+
+                    <mat-autocomplete #autoIndustries="matAutocomplete" (optionSelected)="selectIndustry($event)">
+                        <mat-option *ngFor="let industry of filteredIndustries | async" [value]="industry">
+                            {{industry}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                </mat-form-field>
+            </div>
         </div>
 
     </mat-card-content>

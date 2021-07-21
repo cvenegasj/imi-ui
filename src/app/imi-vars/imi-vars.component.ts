@@ -1,5 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 import { DimensionsType, Imi } from '../models/types';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 import * as d3 from "d3";
 import { SharedService } from '../services/shared.service';
 import { ProviderService } from '../services/provider.service';
@@ -7,15 +10,35 @@ import { Util } from '../utils/util';
 import { ClientService } from '../services/client.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-imi-vars',
   templateUrl: './imi-vars.component.html',
   styleUrls: ['./imi-vars.component.css']
 })
-export class ImiVarsComponent implements OnInit, AfterViewInit {
+export class ImiVarsComponent implements OnInit {
 
-  @Output() onImiRecalculated = new EventEmitter<number>();
+  @Output()
+  onImiRecalculated = new EventEmitter<number>();
+
+  @ViewChild('countryInput')
+  countryInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('industryInput')
+  industryInput!: ElementRef<HTMLInputElement>;
+
+  myControl1 = new FormControl();
+  myControl2 = new FormControl();
+
+  selectedCountries: string[] = [];
+  selectedIndustries: string[] = [];
+  
+  // countries
+  countries: string[] = Util.COUNTRY_LIST;
+  filteredCountries: Observable<string[]>;
+  // industries
+  industries: string[] = Util.INDUSTRY_LIST;
+  filteredIndustries: Observable<string[]>;
 
   appUser: any;
 
@@ -64,7 +87,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     this.dimensions = {
       marginTop: 50,
       marginRight: 50,
-      marginBottom: 50,
+      marginBottom: 30,
       marginLeft: 50,
       height: 450,
       width: 450,
@@ -74,6 +97,19 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       boundedHeight: Math.max(this.dimensions.height - this.dimensions.marginTop - this.dimensions.marginBottom - 40, 0),
       boundedWidth: Math.max(this.dimensions.width - this.dimensions.marginLeft - this.dimensions.marginRight, 0),
     }
+
+    // filters for autocomplete controls
+    this.filteredCountries = this.myControl1.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter1(value))
+      );
+
+    this.filteredIndustries = this.myControl2.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter2(value))
+      );
   }
 
   ngOnInit(): void {
@@ -81,14 +117,9 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       .subscribe(appUser => {
         //console.log(appUser);
         this.appUser = appUser;
-        const imiScore = this.updateVarsAndData();
-        //this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
-        this.createChart();
+        this.updateVarsAndData();
+        this.cleanAndCreateChart();
       });
-  }
-
-  ngAfterViewInit(): void {
-    
   }
 
   // returns imi score
@@ -97,17 +128,8 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       return 0; 
     }
 
-    // create imis vars as map
-    /*for (let i = 0; i < appUser.imis.length; i++) {
-      let tempMap = new Map();
-      for (let [key, value] of Object.entries(appUser.imis[i].vars)) {
-        tempMap.set(+key, value);
-      }
-      appUser.imis[i].vars = tempMap;
-    } */
-
     this.lastImi = this.appUser.imis[this.appUser.imis.length - 1];
-
+    // update vars for UI
     this.sliderValues.value1 = this.lastImi!.vars.get(1)!;
     this.sliderValues.value2 = this.lastImi!.vars.get(2)!;
     this.sliderValues.value3 = this.lastImi!.vars.get(3)!;
@@ -124,15 +146,16 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     this.sliderValues.value14 = this.lastImi!.vars.get(14)!;
     this.sliderValues.value15 = this.lastImi!.vars.get(15)!;
 
+    // update data
     // array of axes for last imi
     const big5Graph = [
-      {axis: Util.INTEGER_TO_NAME_MAP.get(1), value: (this.lastImi!.vars.get(1)! + this.lastImi!.vars.get(2)! + this.lastImi!.vars.get(3)!) / 3},
-      {axis: Util.INTEGER_TO_NAME_MAP.get(2), value: (this.lastImi!.vars.get(4)! + this.lastImi!.vars.get(5)! + this.lastImi!.vars.get(6)!) / 3},
-      {axis: Util.INTEGER_TO_NAME_MAP.get(3), value: (this.lastImi!.vars.get(7)! + this.lastImi!.vars.get(8)! + this.lastImi!.vars.get(9)!) / 3},
-      {axis: Util.INTEGER_TO_NAME_MAP.get(4), value: (this.lastImi!.vars.get(10)! + this.lastImi!.vars.get(11)! + this.lastImi!.vars.get(12)!) / 3},
-      {axis: Util.INTEGER_TO_NAME_MAP.get(5), value: (this.lastImi!.vars.get(13)! + this.lastImi!.vars.get(14)! + this.lastImi!.vars.get(15)!) / 3}
+      {axis: Util.DIMENSION_TO_NAME_MAP.get(1), value: (this.lastImi!.vars.get(1)! + this.lastImi!.vars.get(2)! + this.lastImi!.vars.get(3)!) / 3},
+      {axis: Util.DIMENSION_TO_NAME_MAP.get(2), value: (this.lastImi!.vars.get(4)! + this.lastImi!.vars.get(5)! + this.lastImi!.vars.get(6)!) / 3},
+      {axis: Util.DIMENSION_TO_NAME_MAP.get(3), value: (this.lastImi!.vars.get(7)! + this.lastImi!.vars.get(8)! + this.lastImi!.vars.get(9)!) / 3},
+      {axis: Util.DIMENSION_TO_NAME_MAP.get(4), value: (this.lastImi!.vars.get(10)! + this.lastImi!.vars.get(11)! + this.lastImi!.vars.get(12)!) / 3},
+      {axis: Util.DIMENSION_TO_NAME_MAP.get(5), value: (this.lastImi!.vars.get(13)! + this.lastImi!.vars.get(14)! + this.lastImi!.vars.get(15)!) / 3}
     ];
-    this.data = [big5Graph];
+    this.data = [big5Graph, [], []];
 
     //compute imi score
     let score = 0;
@@ -170,9 +193,9 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
         .subscribe(appUser => {
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
-          this.createChart(); // redraw radar chart
+          this.cleanAndCreateChart(); // redraw radar chart
 
-          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+          this._snackBar.open('Data saved correctly.', 'ok', {
             duration: 2000,
           });
           console.log("Updated!");
@@ -183,9 +206,9 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
         .subscribe(appUser => {
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
-          this.createChart(); // redraw radar chart
+          this.cleanAndCreateChart(); // redraw radar chart
 
-          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+          this._snackBar.open('Data saved correctly.', 'ok', {
             duration: 2000,
           });
           console.log("Updated!");
@@ -195,7 +218,7 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
     this.disabledSliders = true;
   }
 
-  createChart(): void {
+  cleanAndCreateChart(): void {
     if (this.data.length === 0) {
       this.renderer.setProperty(this.chartContainer.nativeElement, 'innerHTML', '<p class="gray-700 centered" style="width: 370px; margin-top: 100px;">No data to show.</p>');
       return;
@@ -207,7 +230,8 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
       .remove();
 
     const color = d3.scaleOrdinal()
-				.range(["#EDC951","#CC333F","#00A0B0"]);
+        .range(["#64DD17", "#CC333F", "#EDC951"]);
+				//.range(["#00A0B0", "#CC333F", "#EDC951"]);
 				
 		let radarChartOptions = {
 			  w: this.dimensions.boundedWidth,
@@ -455,13 +479,77 @@ export class ImiVarsComponent implements OnInit, AfterViewInit {
         line.push(word);
         tspan.text(line.join(" "));
         if (tspan.node()!.getComputedTextLength() > width) {
-        line.pop();
-        tspan.text(line.join(" "));
-        line = [word];
-        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+          line.pop();
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
         }
       }
 	  });
-	}//wrap	
+	}//wrap
+
+  selectCountry(event: MatAutocompleteSelectedEvent): void {
+    this.selectedCountries = [event.option.viewValue];
+    this.countryInput.nativeElement.value = '';
+    this.myControl1.setValue('');
+
+    // get imi data of country
+    this.clientService.getCountryImiForDisplay(this.selectedCountries[0])
+      .subscribe(res => {
+        if (!res) { 
+          this._snackBar.open('No data to show.', 'ok', {
+            duration: 2000,
+          });
+        } else {
+          //console.log(res);
+          this.data[1] = res;
+          this.cleanAndCreateChart();
+        }        
+      });
+  }
+
+  removeCountry() {
+    this.selectedCountries = [];
+    // remove radar chart blot of country
+    this.data[1] = [];
+    this.cleanAndCreateChart();
+  }
+
+  selectIndustry(event: MatAutocompleteSelectedEvent): void {
+    this.selectedIndustries = [event.option.viewValue];
+    this.industryInput.nativeElement.value = '';
+    this.myControl2.setValue('');
+
+    // get imi data of industry
+    this.clientService.getIndustryImiForDisplay(this.selectedIndustries[0])
+      .subscribe(res => {
+        if (!res) { 
+          this._snackBar.open('No data to show.', 'ok', {
+            duration: 2000,
+          });
+        } else {
+          //console.log(res);
+          this.data[2] = res;
+          this.cleanAndCreateChart();
+        }        
+      });
+  }
+
+  removeIndustry() {
+    this.selectedIndustries = [];
+    // remove radar chart blot of country
+    this.data[2] = [];
+    this.cleanAndCreateChart();
+  }
+
+  private _filter1(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.countries.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  private _filter2(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.industries.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
 }

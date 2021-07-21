@@ -5,48 +5,17 @@
     </h1>
 
     <mat-card class="card-1" style="margin-bottom: 100px;">
-        <mat-card-content fxLayout="row" style="padding: 50px;">
+        <mat-card-content style="padding: 50px;">
             
             <div #chartContainer></div>
 
-            <div>
-                <mat-button-toggle-group multiple vertical name="legend" aria-label="Legend">
-                    <mat-button-toggle #toggle1 [value]="true"
-                        class="toggle-1"
-                        (click)="toggle1.value = !toggle1.value; toggleLine('.line-0', toggle1.value)">
-                        Average IMI
-                    </mat-button-toggle>
-                    
-                    <mat-button-toggle #toggle2 [value]="false" 
-                        class="toggle-2"
-                        (click)="toggle2.value = !toggle2.value; toggleLine('.line-1', toggle2.value)">
-                        Product
-                    </mat-button-toggle>
-                    
-                    <mat-button-toggle #toggle3 [value]="false"
-                        class="toggle-3"
-                        (click)="toggle3.value = !toggle3.value; toggleLine('.line-2', toggle3.value)">
-                        Resources
-                    </mat-button-toggle>
-
-                    <mat-button-toggle #toggle4 [value]="false"
-                        class="toggle-4"
-                        (click)="toggle4.value = !toggle4.value; toggleLine('.line-3', toggle4.value)">
-                        Information
-                    </mat-button-toggle>
-
-                    <mat-button-toggle #toggle5 [value]="false"
-                        class="toggle-5"
-                        (click)="toggle5.value = !toggle5.value; toggleLine('.line-4', toggle5.value)">
-                        Organization
-                    </mat-button-toggle>
-
-                    <mat-button-toggle #toggle6 [value]="false"
-                        class="toggle-6"
-                        (click)="toggle6.value = !toggle6.value; toggleLine('.line-5', toggle6.value)">
-                        Innovation
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
+            <div style="margin-left: 90px;">
+                <mat-checkbox class="checkbox-1" [checked]="true" (change)="toggleLine('.line-0', $event.checked)">IMI</mat-checkbox>
+                <mat-checkbox class="checkbox-2" [checked]="false" (change)="toggleLine('.line-1', $event.checked)">Product</mat-checkbox>
+                <mat-checkbox class="checkbox-3" [checked]="false" (change)="toggleLine('.line-2', $event.checked)">Resources</mat-checkbox>
+                <mat-checkbox class="checkbox-4" [checked]="false" (change)="toggleLine('.line-3', $event.checked)">Information</mat-checkbox>
+                <mat-checkbox class="checkbox-5" [checked]="false" (change)="toggleLine('.line-4', $event.checked)">Organization</mat-checkbox>
+                <mat-checkbox class="checkbox-6" [checked]="false" (change)="toggleLine('.line-5', $event.checked)">Innovation</mat-checkbox>
             </div>
 
         </mat-card-content>

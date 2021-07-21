@@ -1,55 +1,43 @@
 <div style="width: 93%; margin: 10px auto 30px;" fxLayout="row wrap" fxLayoutGap="15px">
     
-    <mat-card class="card-2" *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+    <mat-card class="card-2" *ngFor="let p of suggestions">
         <mat-card-title class="font-17">
-            <a class="gray-50 link-hvr-underline" (click)="openProviderDetailDialog('13')" [routerLink]="">
-                Empresa {{i + 1}}
+            <a class="gray-50 link-hvr-underline ellipsed" (click)="openProviderDetailDialog(p)" [routerLink]="">
+                {{p.companyName}}
             </a>
         </mat-card-title>
 
         <mat-card-content>
-        
-            <div class="badges">
+            <div class="badges" *ngIf="getFirst6Services(p.services) as first6">
                 <mat-icon
-                    matTooltip="Info about the action"
+                    *ngFor="let service of first6 | slice:0:5"
+                    matTooltip="lol"
                     matTooltipPosition="above">
-                    verified
+                    {{service.icon}}
                 </mat-icon>
-                <mat-icon
-                    matTooltip="Info about the action"
-                    matTooltipPosition="above">
-                    badge
-                </mat-icon>
-                <mat-icon
-                    matTooltip="Info about the action"
-                    matTooltipPosition="above">
-                    military_tech
-                </mat-icon>
-                <mat-icon
-                    matTooltip="Info about the action"
-                    matTooltipPosition="above">
-                    local_police
-                </mat-icon>
-                <mat-icon
-                    matTooltip="Info about the action"
-                    matTooltipPosition="above">
-                    badge
-                </mat-icon>
+
+                <div style="float: right; height: 30px; line-height: 30px !important;" 
+                    class="gray-300 font-12" *ngIf="first6.length > 5">
+                    more...
+                </div>
             </div>
 
-            <div class="content-detail">
+            <div class="content-detail ellipsed">
                 <mat-icon>public</mat-icon>
-                <a class="link-hvr-underline" href="https://google.com" target="_blank">google.com</a>
+                <span class="link-hvr-underline" [innerHTML]="p.website! | linky" *ngIf="p.website"></span>
+                <span class="gray-500" *ngIf="!p.website">(No data)</span>
             </div>
 
-            <div class="content-detail">
+            <div class="content-detail ellipsed">
                 <mat-icon>email</mat-icon>
-                <a class="link-hvr-underline" href="mailto: abc@example.com">abc@example.com</a>
+                <a class="link-hvr-underline" [href]="'mailto: ' + p.email" *ngIf="p.email">{{p.email}}</a>
+                <span class="gray-500" *ngIf="!p.email">(No data)</span>
             </div>
 
-            <div class="content-detail">
+            <div class="content-detail ellipsed">
                 <mat-icon>phone</mat-icon>
-                <a class="link-hvr-underline" href="https://wa.me/51955088838" target="_blank">51955088838</a>
+                <a class="link-hvr-underline" href="https://wa.me/51955088838" target="_blank">{{p.phone}}</a>
+                <span class="gray-500" *ngIf="!p.phone">(No data)</span>
             </div>
             
         </mat-card-content>

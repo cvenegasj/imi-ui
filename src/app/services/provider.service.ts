@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { Imi, Provider } from '../models/types';
+import { Provider } from '../models/types';
 
 @Injectable({
     providedIn: 'root',

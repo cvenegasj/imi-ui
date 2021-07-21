@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>
-    <span>Empresa ABC</span>
+    <span>{{provider.companyName}}</span>
     <span fxFlex></span>
     <button mat-icon-button mat-dialog-close>
         <mat-icon>close</mat-icon>
@@ -7,36 +7,51 @@
 </h1>
 
 <mat-dialog-content>
-    <div>
+
+    <div class="gray-700" style="width: 150px;">Services</div>
+
+    <div fxLayout="row wrap" fxLayoutGap="5px">
+        <div class="service-badge-2 centered" 
+            [style]="'background-color: ' + service.color + ';'" 
+            *ngFor="let service of flatServices()">
+            <mat-icon>
+                {{service.icon}}
+            </mat-icon>
+
+            <br />
+
+            <div class="name ellipsed-3">
+                {{service.name}}
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
         <p class="gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non lacinia nibh, nec aliquet est. Quisque in dolor malesuada, 
-            molestie massa sed, elementum dolor. Suspendisse vestibulum mauris dolor, id venenatis dui rutrum sit amet. Quisque pellentesque 
-            pretium odio, vitae congue justo commodo ut. Duis viverra dapibus vehicula. Cras sapien arcu, sodales in consequat ac, vestibulum 
-            tempor enim. Integer eros dolor, semper quis pellentesque et, imperdiet non sapien.
+            {{provider.description}}
         </p>
     </div>
 
     <div>
         <mat-icon class="green-a700" style="vertical-align: bottom;">public</mat-icon>
-        <span [innerHTML]="'www.google.com' | linky" class="gray-700" style="margin-left: 5px;"></span>
+        <span [innerHTML]="provider.website! | linky" class="gray-700" style="margin-left: 5px;"></span>
     </div>
 
     <div style="margin-top: 15px;">
         <mat-icon class="green-a700" style="vertical-align: bottom;">phone</mat-icon>
-        <a href="https://wa.me/51955088838" class="gray-700" style="margin-left: 5px;">+51955088838</a>
+        <a href="https://wa.me/{{provider.phone}}" class="gray-700" style="margin-left: 5px;">{{provider.phone}}</a>
     </div>
     
     <div style="margin-top: 15px;">
         <mat-icon class="green-a700" style="vertical-align: bottom;">email</mat-icon>
-        <a href="mailto: abc@example.com" class="gray-700" style="margin-left: 5px;">abc@example.com</a>
+        <a [href]="'mailto: ' + provider.email" class="gray-700" style="margin-left: 5px;">{{provider.email}}</a>
     </div>
 
     <div style="margin-top: 15px;">
         <div class="gray-700" style="width: 150px;">Countries</div>
         <div>
             <ul class="gray-700">
-                <li>Peru</li>
-                <li>United States</li>
+                <li *ngFor="let c of provider.countries">{{c}}</li>
             </ul>
         </div>
     </div>
@@ -45,8 +60,7 @@
         <div class="gray-700" style="width: 150px;">Industries</div>
         <div>
             <ul class="gray-700">
-                <li>IT</li>
-                <li>Biomedical</li>
+                <li *ngFor="let ind of provider.industries">{{ind}}</li>
             </ul>
         </div>
     </div>
@@ -55,8 +69,7 @@
         <div class="gray-700" style="width: 150px;">External URLs</div>
         <div>
             <ul class="gray-700">
-                <li><span [innerHTML]="'www.google.com' | linky"></span></li>
-                <li><span [innerHTML]="'www.facebook.com' | linky"></span></li>
+                <li *ngFor="let link of provider.extraUrls"><span [innerHTML]="link | linky"></span></li>
             </ul>
         </div>
     </div>

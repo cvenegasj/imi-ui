@@ -13,7 +13,6 @@ import { SharedService } from '../services/shared.service';
 export class ProviderServicesComponent implements OnInit {
 
   appUser: any;
-
   disabledInputs: boolean = true;
 
   // all possible services
@@ -99,7 +98,12 @@ export class ProviderServicesComponent implements OnInit {
 
     this.providerService.updateServices(this.appUser.id, userServices)
       .subscribe(res => {
-        this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+        this.appUser.services = userServices;
+        console.log(this.appUser);
+        
+        this.sharedService.nextAppUser(this.appUser); // update appUser object in session
+
+        this._snackBar.open('Data saved correctly.', 'ok', {
           duration: 2000,
         });
         this.disabledInputs = true;

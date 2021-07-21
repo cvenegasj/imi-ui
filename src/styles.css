@@ -37,6 +37,28 @@ a.link-hvr-underline:hover {
     text-decoration: underline;
 }
 
+.ellipsed {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ellipsed-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsed-3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .centered {
     text-align: center;
 }
@@ -142,12 +164,30 @@ a.link-hvr-underline:hover {
     line-height: 32px !important;
 }
 
+.font-28 {
+    font-size: 28px !important;
+    line-height: 34px !important;
+}
+
+.font-30 {
+    font-size: 30px !important;
+    line-height: 36px !important;
+}
+
 .gray-50 {
     color: #FAFAFA;
 }
 
 .gray-100 {
     color: #F5F5F5;
+}
+
+.gray-300 {
+    color: #E0E0E0;
+}
+
+.gray-400 {
+    color: #BDBDBD;
 }
 
 .gray-500 {
@@ -222,7 +262,7 @@ mat-card.card-1 {
 
 mat-card.card-2 {
     margin-top: 15px;
-    width: 190px;
+    width: 194px;
     background-color: #9C27B0;
     border-radius: 20px;
     box-shadow: -4px 13px 28px 0px rgba(0,0,0,0.56) !important;
@@ -243,11 +283,13 @@ mat-card.card-2 mat-card-content > div.content-detail > mat-icon {
 
 mat-card.card-2 mat-card-content > div.badges {
     padding: 5px 0;
+    height: 30px;
 }
 
 mat-card.card-2 mat-card-content > div.badges mat-icon {
     margin-right: 7px;
     font-size: 27px;
+    line-height: 27px;
     color: #00E676;
 }
 
@@ -414,36 +456,6 @@ path.line-5 {
     stroke-width: 0;
 }
 
-mat-button-toggle.toggle-1 {
-    color: white;
-    background-color: #06D6A0;
-}
-
-mat-button-toggle.toggle-2 {
-    color: white;
-    background-color: #FFD166;
-}
-
-mat-button-toggle.toggle-3 {
-    color: white;
-    background-color: #118AB2;
-}
-
-mat-button-toggle.toggle-4 {
-    color: white;
-    background-color: #EF476F;
-}
-
-mat-button-toggle.toggle-5 {
-    color: white;
-    background-color: #073B4C;
-}
-
-mat-button-toggle.toggle-6 {
-    color: white;
-    background-color: #f77f00;
-}
-
 mat-accordion.edit-services mat-panel-title.title-dim {
     text-transform: uppercase;
     font-weight: 500;
@@ -466,4 +478,77 @@ mat-accordion.edit-services div.show-subdim {
 
 mat-accordion.edit-services div.show-subdim div.subdim-services mat-form-field {
     width: 100%;
+}
+
+div.service-badge-1 {
+    margin-top: 5px;
+    width: 75px;
+    height: 90px;
+    padding: 10px 13px;
+    color: white;
+    border-radius: 8% 8%;
+    margin-right: 5px;
+}
+
+div.service-badge-1 mat-icon {
+    font-size: 35px;
+    position: relative;
+    left: -7px;
+}
+
+div.service-badge-1 div.name {
+    font-size: 13px;
+    line-height: normal;
+}
+
+div.service-badge-2 {
+    margin-top: 5px;
+    width: 65px;
+    height: 80px;
+    padding: 6px 8px;
+    color: white;
+    border-radius: 8% 8%;
+    margin-right: 5px;
+}
+
+div.service-badge-2 mat-icon {
+    font-size: 30px;
+    position: relative;
+    left: -5px;
+}
+
+div.service-badge-2 div.name {
+    font-size: 12px;
+    line-height: normal;
+}
+
+mat-checkbox.checkbox-1, mat-checkbox.checkbox-2,
+mat-checkbox.checkbox-3, mat-checkbox.checkbox-4,
+mat-checkbox.checkbox-5, mat-checkbox.checkbox-6 {
+    margin-right: 15px;
+}
+ 
+mat-checkbox.checkbox-1.mat-checkbox-checked .mat-checkbox-background {
+    background-color: #06D6A0;
+}
+
+mat-checkbox.checkbox-2.mat-checkbox-checked .mat-checkbox-background {
+    /*background-color: #FFD166; */
+    background-color: #ffc94a;
+}
+
+mat-checkbox.checkbox-3.mat-checkbox-checked .mat-checkbox-background {
+    background-color: #118AB2;
+}
+
+mat-checkbox.checkbox-4.mat-checkbox-checked .mat-checkbox-background {
+    background-color: #EF476F;
+}
+
+mat-checkbox.checkbox-5.mat-checkbox-checked .mat-checkbox-background {
+    background-color: #073B4C;
+}
+
+mat-checkbox.checkbox-6.mat-checkbox-checked .mat-checkbox-background {
+    background-color: #f77f00;
 }

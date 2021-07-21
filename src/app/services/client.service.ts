@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { Client } from '../models/types';
+import { Client, Provider } from '../models/types';
 
 @Injectable({
     providedIn: 'root',
@@ -49,6 +49,24 @@ export class ClientService {
             .pipe(
                 catchError(this.error)
             );
+    }
+
+    // get suggested providers for a specific client
+    getSuggestions(idClient: string): Observable<Provider[]> {
+        let API_URL = `${this.apiUrl}/clients/${idClient}/get-suggestions`;
+        return this.http.get<Provider[]>(API_URL);
+    }
+
+    // get imi data of country for display
+    getCountryImiForDisplay(country: string): Observable<any> {
+        let API_URL = `${this.apiUrl}/clients/get-country-imi/${country}`;
+        return this.http.get<any>(API_URL);
+    }
+
+    // get imi data of sector for display
+    getIndustryImiForDisplay(industry: string): Observable<any> {
+        let API_URL = `${this.apiUrl}/clients/get-industry-imi/${industry}`;
+        return this.http.get<any>(API_URL);
     }
 
     // Handle Errors 
