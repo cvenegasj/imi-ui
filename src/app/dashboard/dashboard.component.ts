@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit {
         this.userIsProvider = user.services ? true : false;
 
         if (this.userIsProvider) {
+          this.providerServices = [];
+          
           for (let [key, value] of this.appUser.services) {
             for (let service of value) {
               let colorDim = "";

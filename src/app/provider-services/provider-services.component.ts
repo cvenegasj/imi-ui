@@ -99,10 +99,8 @@ export class ProviderServicesComponent implements OnInit {
     this.providerService.updateServices(this.appUser.id, userServices)
       .subscribe(res => {
         this.appUser.services = userServices;
-        console.log(this.appUser);
-        
+        //console.log(this.appUser);
         this.sharedService.nextAppUser(this.appUser); // update appUser object in session
-
         this._snackBar.open('Data saved correctly.', 'ok', {
           duration: 2000,
         });
