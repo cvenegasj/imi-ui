@@ -220,7 +220,9 @@ export class ImiVarsComponent implements OnInit {
 
   cleanAndCreateChart(): void {
     if (this.data.length === 0) {
-      this.renderer.setProperty(this.chartContainer.nativeElement, 'innerHTML', '<p class="gray-700 centered" style="width: 370px; margin-top: 100px;">No data to show.</p>');
+      this.renderer.setProperty(this.chartContainer.nativeElement, 
+        'innerHTML', 
+        '<p class="gray-700 centered" style="width: 370px; margin-top: 100px;">No data to show.</p>');
       return;
     }
 

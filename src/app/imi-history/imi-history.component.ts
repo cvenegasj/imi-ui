@@ -47,10 +47,9 @@ export class ImiHistoryComponent implements OnInit {
         this.data = appUser.imis;
         this.slices = this.processData(appUser.imis);
         //console.log(this.slices);
-        this.createChart();
+        this.cleanAndCreateChart();
       });
 
-      
       //let result: any[] = [
         //{dateTime: new Date('2020-10-01'), vars: new Map([[1, 3], [2, 2], [3, 4], [4, 4], [5, 2], [6, 1] ,[7, 5], [8, 4], [9, 4], [10, 3], [11, 4], [12, 5], [13, 2], [14, 3], [15, 2]])},
         //{dateTime: new Date('2020-11-01'), vars: new Map([[1, 1], [2, 1], [3, 1], [4, 2], [5, 2], [6, 2] ,[7, 3], [8, 3], [9, 3], [10, 1], [11, 3], [12, 5], [13, 5], [14, 4], [15, 5]])},
@@ -68,11 +67,18 @@ export class ImiHistoryComponent implements OnInit {
 
   }
 
-  createChart(): void {
+  cleanAndCreateChart(): void {
     if (this.data.length === 0) {
-      this.renderer.setProperty(this.chartContainer.nativeElement, 'innerHTML', '<p class="gray-700 centered" style="width: 400px; margin-top: 100px;">No data to show.</p>');
+      this.renderer.setProperty(this.chartContainer.nativeElement, 
+        'innerHTML', 
+        '<p class="gray-700 centered" style="width: 400px; margin-top: 100px;">No data to show.</p>');
       return;
     }
+
+    // remove any pre-existing chart
+    d3.select(this.chartContainer.nativeElement)
+      .selectChild('svg')
+      .remove();
 
     // SVG container
     this.wrapper = d3.select(this.chartContainer.nativeElement)
