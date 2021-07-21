@@ -32,8 +32,13 @@
 
     <!-- card with sliders and radar chart -->
     <h1 style="width: 92%; margin: 45px auto 0;">
-        <span class="bolder purple-700">Your IMI Score:</span>
-        <span class="bolder font-30" style="display: inline-block; padding: 2px 8px; margin-left: 7px; background-color: #FFFF00;">{{imiScore | number : '1.2-2'}}</span>
+        <span class="imi-score-label">
+            Your IMI Score:
+        </span>
+        
+        <span class="imi-score-value">
+            {{imiScore | number : '1.2-2'}}
+        </span>
     </h1>
     <app-imi-vars (onImiRecalculated)="setImiScore($event)"></app-imi-vars>
             

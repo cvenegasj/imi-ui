@@ -552,3 +552,19 @@ mat-checkbox.checkbox-5.mat-checkbox-checked .mat-checkbox-background {
 mat-checkbox.checkbox-6.mat-checkbox-checked .mat-checkbox-background {
     background-color: #f77f00;
 }
+
+span.imi-score-label {
+    font-weight: 600;
+    color: #7B1FA2;
+}
+
+span.imi-score-value {
+    color: white;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: normal;
+    background-color: #00C853;
+    display: inline-block;
+    padding: 2px 8px;
+    margin-left: 7px;
+}

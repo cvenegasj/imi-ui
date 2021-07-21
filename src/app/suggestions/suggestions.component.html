@@ -1,3 +1,7 @@
+<div class="gray-600 centered" style="width: 100%; margin: 30px 0 70px;" *ngIf="suggestions.length === 0">
+    No suggestions
+</div>
+
 <div style="width: 93%; margin: 10px auto 30px;" fxLayout="row wrap" fxLayoutGap="15px">
     
     <mat-card class="card-2" *ngFor="let p of suggestions">
