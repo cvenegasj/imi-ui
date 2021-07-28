@@ -3,18 +3,22 @@
     <mat-stepper linear #stepper style="width: 80%; flex: 1 1 auto; margin: 0 auto;">
         <mat-step label="User type">
             <div class="centered" style="margin-top: 20px;">
-                <p class="font-20">Sign up as</p>
+                <p class="font-20" style="margin-bottom: 20px;">Sign up as</p>
 
-                <button mat-raised-button color="primary" style="margin-right: 10px; height: 90px; width: 160px;" (click)="setUserType('client')">
-                    <mat-icon>verified</mat-icon>
+                <button mat-raised-button color="accent" style="margin-right: 10px; height: 140px; width: 170px;" (click)="setUserType('client')">
+                    <mat-icon style="font-size: 35px; line-height: normal; position: relative; left: -6px;">verified</mat-icon>
                     <br />
-                    Company
+                    <span class="btn-title">COMPANY</span>
+                    <br />
+                    <p class="btn-subtitle">I want to measure my industrial maturity level</p>
                 </button>
                 
-                <button mat-raised-button color="primary" style="height: 90px; width: 160px;" (click)="setUserType('provider')">
-                    <mat-icon>star_rate</mat-icon>
+                <button mat-raised-button color="accent" style="height: 140px; width: 170px;" (click)="setUserType('provider')">
+                    <mat-icon style="font-size: 35px; line-height: normal; position: relative; left: -6px;">star_rate</mat-icon>
                     <br />
-                    Tech Provider
+                    <span class="btn-title">TECH PROVIDER</span>
+                    <br />
+                    <p class="btn-subtitle">I provide industrial technologies or services</p>
                 </button>
             </div>
         </mat-step>

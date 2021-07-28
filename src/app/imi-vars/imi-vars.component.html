@@ -3,6 +3,11 @@
     <mat-card-content fxLayout="row">
     
         <div fxFlex style="padding-top: 75px; margin-right: 60px; margin-left: 40px;">
+
+            <div style="margin-bottom: 20px;">
+                <button mat-button color="accent" (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
+                <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledSliders">Save Changes</button>
+            </div>
             
             <mat-accordion multi>
                 
@@ -188,11 +193,6 @@
                 </mat-expansion-panel>
             
             </mat-accordion>
-
-            <div style="margin-top: 20px;">
-                <button mat-button color="accent" (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
-                <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledSliders">Save Changes</button>
-            </div>
 
         </div>
 

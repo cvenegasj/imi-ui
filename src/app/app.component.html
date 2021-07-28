@@ -1,9 +1,11 @@
-<!--<mat-progress-bar mode="indeterminate" color="accent" *ngIf="sharedService.isLoading$ | async"></mat-progress-bar> -->
-
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z8" style="position: relative; z-index: 5;">
     <a class="no-hover" routerLink="/" style="margin-right: 15px;">
         {{title}}
     </a>
+
+    <span style="margin-left: 30px;" *ngIf="sharedService.appUser$ | async as user">
+        {{user.companyName}}
+    </span>
 
     <span fxFlex></span>
 
