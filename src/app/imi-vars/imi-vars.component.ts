@@ -184,13 +184,27 @@ export class ImiVarsComponent implements OnInit {
       [15, this.sliderValues.value15]
     ]);
 
-    let newImi = new Imi();
-    newImi.vars = mapVars;
-    this.appUser.imis.push(newImi); // corregir esto!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     if (this.appUser.services) { // is provider
       this.providerService.updateImi(this.appUser.id, mapVars)
         .subscribe(appUser => {
+          // provider's services
+          let mapServices: Map<number, string[]> = new Map();
+          for (let [key, value] of Object.entries(appUser.services)) {
+            mapServices.set(+key, value);
+          }
+          appUser.services = mapServices;
+          // imis
+          for (let i = 0; i < appUser.imis.length; i++) {
+            let tempMap = new Map();
+            for (let [key, value] of Object.entries(appUser.imis[i].vars)) {
+              tempMap.set(+key, value);
+            }
+            appUser.imis[i].vars = tempMap;
+          }
+
+          this.sharedService.nextAppUser(appUser);
+          this.appUser = appUser;
+
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.cleanAndCreateChart(); // redraw radar chart
@@ -204,6 +218,18 @@ export class ImiVarsComponent implements OnInit {
     } else { // is client
       this.clientService.updateImi(this.appUser.id, mapVars)
         .subscribe(appUser => {
+          // imis
+          for (let i = 0; i < appUser.imis.length; i++) {
+            let tempMap = new Map();
+            for (let [key, value] of Object.entries(appUser.imis[i].vars)) {
+              tempMap.set(+key, value);
+            }
+            appUser.imis[i].vars = tempMap;
+          }
+
+          this.sharedService.nextAppUser(appUser);
+          this.appUser = appUser;
+          
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.cleanAndCreateChart(); // redraw radar chart

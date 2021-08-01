@@ -8,6 +8,16 @@
 
         <mat-card class="card-1"> 
             <mat-card-content style="padding: 30px;">
+
+                <div class="centered" *ngIf="providerServices.length === 0">
+                    <p class="gray-600 centered">
+                        No services yet.
+                    </p>
+
+                    <a mat-raised-button color="accent" routerLink="/profile" >
+                        Add a Service You Provide
+                    </a>
+                </div>
                 
                 <div fxLayout="row wrap" fxLayoutGap="5px">
                     <div class="service-badge-1 centered" 

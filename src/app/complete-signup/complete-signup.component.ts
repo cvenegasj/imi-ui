@@ -175,6 +175,15 @@ export class CompleteSignupComponent implements OnInit {
         .subscribe(c => {
           if (c) {
             //console.log(result);
+            // imis
+            for (let i = 0; i < c.imis.length; i++) {
+              let tempMap = new Map();
+              for (let [key, value] of Object.entries(c.imis[i].vars)) {
+                tempMap.set(+key, value);
+              }
+              c.imis[i].vars = tempMap;
+            }
+
             this.sharedService.nextAppUser(c as Client);
             this.router.navigate(['/dashboard']);
           } else {
@@ -195,12 +204,20 @@ export class CompleteSignupComponent implements OnInit {
         .subscribe(p => {
           if (p) {
             //console.log(p);
-            // provider's services manual mapping
+            // provider's services
             let mapServices: Map<number, string[]> = new Map();
             for (let [key, value] of Object.entries(p.services)) {
               mapServices.set(+key, value);
             }
             p.services = mapServices;
+            // imis
+            for (let i = 0; i < p.imis.length; i++) {
+              let tempMap = new Map();
+              for (let [key, value] of Object.entries(p.imis[i].vars)) {
+                tempMap.set(+key, value);
+              }
+              p.imis[i].vars = tempMap;
+            }
       
             this.sharedService.nextAppUser(p as Provider);
             this.router.navigate(['/dashboard']);

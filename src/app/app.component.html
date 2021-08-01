@@ -3,7 +3,9 @@
         {{title}}
     </a> -->
 
-    <img src="./assets/IMI_LOGO_WHITE.png" width="130" />
+    <a routerLink="/">
+        <img src="./assets/IMI_LOGO_WHITE.png" width="130" />
+    </a>
 
     <span style="margin-left: 50px;" *ngIf="sharedService.appUser$ | async as user">
         {{user.companyName}}

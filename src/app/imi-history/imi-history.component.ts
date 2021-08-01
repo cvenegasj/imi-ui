@@ -64,7 +64,6 @@ export class ImiHistoryComponent implements OnInit {
       //];
       //this.data = this.processData(result);
       //this.slices = this.processData(result);
-
   }
 
   cleanAndCreateChart(): void {
@@ -206,12 +205,12 @@ export class ImiHistoryComponent implements OnInit {
       let avg5 = (imis[i].vars.get(13) + imis[i].vars.get(14) + imis[i].vars.get(15)) / 3;
       let avg = (avg1 + avg2 + avg3 + avg4 + avg5) / 5;
       
-      values0.push({dateTime: imis[i].dateTime, value: avg});
-      values1.push({dateTime: imis[i].dateTime, value: avg1});
-      values2.push({dateTime: imis[i].dateTime, value: avg2});
-      values3.push({dateTime: imis[i].dateTime, value: avg3});
-      values4.push({dateTime: imis[i].dateTime, value: avg4});
-      values5.push({dateTime: imis[i].dateTime, value: avg5});
+      values0.push({dateTime: imis[i].dateTime, value: avg.toFixed(2)});
+      values1.push({dateTime: imis[i].dateTime, value: avg1.toFixed(2)});
+      values2.push({dateTime: imis[i].dateTime, value: avg2.toFixed(2)});
+      values3.push({dateTime: imis[i].dateTime, value: avg3.toFixed(2)});
+      values4.push({dateTime: imis[i].dateTime, value: avg4.toFixed(2)});
+      values5.push({dateTime: imis[i].dateTime, value: avg5.toFixed(2)});
     }
 
     let slices = [
