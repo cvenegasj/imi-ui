@@ -1,18 +1,28 @@
 export class Util {
 
-    // List source: https://corporatefinanceinstitute.com/resources/knowledge/finance/the-sp-sectors/
     static INDUSTRY_LIST = [
-        'Information Technology', 
-        'Health Care', 
-        'Financials', 
-        'Consumer Discretionary', 
-        'Communication Services', 
-        'Industrials', 
-        'Consumer Staples', 
-        'Energy', 
-        'Utilities', 
-        'Real Estate', 
-        'Materials', 
+        'Food - Agro', 
+        'Food - Farming', 
+        'Food - Fishing', 
+        'Food - Gastronomy', 
+        'Food - Nutrition', 
+        'Biotech - Medical', 
+        'Biotech - Nutrition', 
+        'Biotech - Equipment', 
+        'Construction - Real Estate', 
+        'Construction - Architecture', 
+        'Construction - Design',
+        'Transport',
+        'Sports',
+        'Commerce',
+        'Tourism',
+        'Energy - Non-renewable',
+        'Energy - Renewable',
+        'Mining',
+        'Manufacture - Textile',
+        'Manufacture - Artisan',
+        'Digital Fabrication',
+        'Finance',
         'Others'
     ];
 

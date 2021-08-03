@@ -6,6 +6,8 @@
 
             <div style="margin-bottom: 20px;">
                 <button mat-button color="accent" (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
+                
+                <button mat-raised-button (click)="disabledSliders = !disabledSliders;" style="margin-right: 5px;" *ngIf="!disabledSliders">Cancel</button>
                 <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledSliders">Save Changes</button>
             </div>
             

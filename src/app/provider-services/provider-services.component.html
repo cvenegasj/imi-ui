@@ -553,6 +553,8 @@
 
         <div style="margin-top: 20px;">
             <button mat-button color="accent" (click)="disabledInputs = !disabledInputs;" *ngIf="disabledInputs">Edit</button>
+
+            <button mat-raised-button (click)="disabledInputs = !disabledInputs;" style="margin-right: 5px;" *ngIf="!disabledInputs">Cancel</button>
             <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledInputs">Save Changes</button>
         </div>
     
