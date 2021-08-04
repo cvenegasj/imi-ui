@@ -1,14 +1,15 @@
 export class Util {
 
     static INDUSTRY_LIST = [
+        'Information Technologies',
         'Food - Agro', 
         'Food - Farming', 
         'Food - Fishing', 
         'Food - Gastronomy', 
         'Food - Nutrition', 
-        'Biotech - Medical', 
-        'Biotech - Nutrition', 
-        'Biotech - Equipment', 
+        'Biotechnology - Medical', 
+        'Biotechnology - Nutrition', 
+        'Biotechnology - Equipment', 
         'Construction - Real Estate', 
         'Construction - Architecture', 
         'Construction - Design',
@@ -23,6 +24,25 @@ export class Util {
         'Manufacture - Artisan',
         'Digital Fabrication',
         'Finance',
+
+        'Aerospace',
+        'Chemistry',
+        'Engineering',
+        'Forestry and Paper',
+        'Metallurgy',
+        'Industrial Manufacturing',
+        'Logistics',
+        'Electronics',
+        'Automotive',
+        'Fashion Industry',
+        'Education',
+        'Farmaceutical',
+        'Mechanics',
+        'Leatherworking',
+        'Refresher',
+        'Livestock',
+        'Environment',
+        'Restoration',
         'Others'
     ];
 
