@@ -203,15 +203,15 @@ a.link-hvr-underline:hover {
 }
 
 .purple-700 {
-    color: #7B1FA2;
+    color: #6200EA;
 }
 
 .purple-800 {
-    color: #6A1B9A;
+    color: #4527A0;
 }
 
 .purple-900 {
-    color: #4A148C;
+    color: #311B92;
 }
 
 .green-700 {
@@ -263,7 +263,7 @@ mat-card.card-1 {
 mat-card.card-2 {
     margin-top: 15px;
     width: 194px;
-    background-color: #9C27B0;
+    background-color: #673AB7;
     border-radius: 20px;
     box-shadow: -4px 13px 28px 0px rgba(0,0,0,0.56) !important;
 }
@@ -555,7 +555,7 @@ mat-checkbox.checkbox-6.mat-checkbox-checked .mat-checkbox-background {
 
 span.imi-score-label {
     font-weight: 600;
-    color: #7B1FA2;
+    color: #6200EA;
 }
 
 span.imi-score-value {
