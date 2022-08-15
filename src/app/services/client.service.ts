@@ -69,6 +69,12 @@ export class ClientService {
         return this.http.get<any>(API_URL);
     }
 
+    // get imi data of all countries for display
+    getAllCountriesImiForDisplay(): Observable<any> {
+        let API_URL = `${this.apiUrl}/clients/get-country-imi`;
+        return this.http.get<any>(API_URL);
+    }
+
     // Handle Errors 
     error(error: HttpErrorResponse) {
         let errorMessage = '';

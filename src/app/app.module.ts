@@ -18,6 +18,7 @@ import { ImiVarsComponent } from './imi-vars/imi-vars.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { ProviderDetailDialogComponent } from './provider-detail-dialog/provider-detail-dialog.component';
 import { ProviderServicesComponent } from './provider-services/provider-services.component';
+import { ImiMapPlotComponent } from './imi-map-plot/imi-map-plot.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProviderServicesComponent } from './provider-services/provider-services
     SuggestionsComponent,
     ProviderDetailDialogComponent,
     ProviderServicesComponent,
+    ImiMapPlotComponent,
 
   ],
   imports: [

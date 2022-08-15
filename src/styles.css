@@ -317,6 +317,7 @@ div.slider-container mat-label mat-icon {
     vertical-align: bottom;
     color: #00C853;
 }
+
 div.slider-container span.score-slider {
     font-size: 13px !important;
     line-height: 17px !important;
@@ -589,5 +590,73 @@ button p.btn-subtitle {
     white-space: pre-wrap;
     font-size: 13px;
     line-height: normal;
+    font-weight: 400;
+}
+
+/* MAP */
+.earth {
+    fill: #e3fcff;
+    shape-rendering: crispEdges;
+}
+
+.graticule {
+    fill: none;
+    stroke: #daf2f5;
+    stroke-width: 0.7;
+    /*shape-rendering: crispEdges;*/
+}
+
+.legend-title {
+    font-size: 12px;
+    font-weight: 500;
+    fill: #757575;
+    text-anchor: middle;
+}
+
+.legend-value {
+    font-size: 10px;
+    font-weight: 400;
+    fill: #757575;
+    dominant-baseline: middle;
+}
+
+.tooltip {
+    opacity: 0;
+    position: absolute;
+    /* top: -12px; */
+    /* left: 0; */
+    padding: 0.3em 0.5em;
+    background: #fff;
+    text-align: center;
+    border: 1px solid #ddd;
+    z-index: 10;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+}
+
+.tooltip:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: translate(-50%, 50%) rotate(45deg);
+    transform-origin: center center;
+    z-index: 10;
+}
+
+.tooltip-country {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.tooltip-value {
+    font-size: 11px;
     font-weight: 400;
 }

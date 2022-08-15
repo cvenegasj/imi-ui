@@ -1,0 +1,63 @@
+<div style="margin: 35px 25px;">
+
+    <h1 class="bolder purple-700">
+        IMI World Map
+    </h1>
+
+    <mat-card class="card-1" style="margin-bottom: 100px;">
+        <mat-card-content style="padding: 50px;">
+            
+            <div #chartContainer>
+                <div id="tooltip" class="tooltip">
+                    <div class="tooltip-country" id="country"></div>
+                    <div class="tooltip-value">
+                        IMI score: <span id="value"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-left: 90px;">
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>IMI dimension</mat-label>
+                        <mat-select (value)="selectedImiDimension" (selectionChange)="selectImiDimension($event.value)">
+                            <mat-option [value]="0">All</mat-option>
+                            <mat-option [value]="1">Product</mat-option>
+                            <mat-option [value]="2">Resources</mat-option>
+                            <mat-option [value]="3">Information</mat-option>
+                            <mat-option [value]="4">Organization</mat-option>
+                            <mat-option [value]="5">Innovation</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- <div>
+                    <mat-form-field appearance="fill" style="width: 250px;">
+                        <mat-label>Industry</mat-label>
+
+                        <mat-chip-list #industryList>
+                            <mat-chip *ngFor="let industry of selectedIndustries" [removable]="true" (removed)="removeIndustry()">
+                                {{industry}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+
+                        <input #industryInput matInput
+                                placeholder="Type industry"
+                                [matChipInputFor]="industryList"
+                                [formControl]="myControl1"
+                                [matAutocomplete]="autoIndustries">
+
+                        <mat-autocomplete #autoIndustries="matAutocomplete" (optionSelected)="selectIndustry($event)">
+                            <mat-option *ngFor="let industry of filteredIndustries | async" [value]="industry">
+                                {{industry}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>           
+                </div> -->
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

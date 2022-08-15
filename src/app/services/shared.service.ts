@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { Client, Provider } from '../models/types';
 
 @Injectable({
     providedIn: 'root'
@@ -22,5 +21,4 @@ export class SharedService {
     nextAppUser(user: any) {
         this.appUserSubject$.next(user);
     }
-
 }

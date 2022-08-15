@@ -5,6 +5,7 @@ import { AuthGuard } from '@auth0/auth0-angular';
 import { CompleteSignupComponent } from './complete-signup/complete-signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ImiHistoryComponent } from './imi-history/imi-history.component';
+import { ImiMapPlotComponent } from './imi-map-plot/imi-map-plot.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'history', component: ImiHistoryComponent, canActivate: [AuthGuard] },
+  { path: 'map', component: ImiMapPlotComponent, canActivate: [AuthGuard] },
   { path: 'complete-signup', component: CompleteSignupComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'dashboard' }
 ];
