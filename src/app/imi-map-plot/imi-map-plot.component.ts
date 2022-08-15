@@ -159,7 +159,7 @@ export class ImiMapPlotComponent implements OnInit {
                                       //console.log(this.data[countryIdAccessor(d)]);
 
                                       if (typeof this.data[countryIdAccessor(d)] == "undefined") {
-                                        console.log(`Country key not found in IMI: ${countryIdAccessor(d)}`);
+                                        //console.log(`Country key not found in IMI: ${countryIdAccessor(d)}`);
                                         return "#e2e6e9";
                                       }
 
