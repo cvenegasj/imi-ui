@@ -239,7 +239,9 @@ export class ImiMapPlotComponent implements OnInit {
 
           tooltip.style("opacity", 1);
 
+          let count = this.data[countryIdAccessor(d.toElement.__data__)][6].count;
           let metricValue = 0;
+          
           switch (this.selectedImiDimension) {
             case 0:
               metricValue = this.data[countryIdAccessor(d.toElement.__data__)][0].value;
@@ -264,7 +266,8 @@ export class ImiMapPlotComponent implements OnInit {
           }
 
           tooltip.select("#country").text(countryNameAccessor(d.toElement.__data__));
-          tooltip.select("#value").text(`${d3.format(",.2f")(metricValue || 0)}`);
+          tooltip.select("#value1").text(`${d3.format(",.2f")(metricValue || 0)}`);
+          tooltip.select("#value2").text(`${count}`);
 
           const [centerX, centerY] = pathGenerator.centroid(d.toElement.__data__);
           const x = centerX + this.dimensions.marginLeft;
