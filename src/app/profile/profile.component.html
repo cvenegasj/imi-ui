@@ -19,6 +19,15 @@
                     </div>
                 </div>
 
+                <div *ngIf="userIsAcademic()">
+                    <div class="label">
+                        <span>Type</span>
+                    </div>
+                    <div class="datum">
+                        {{appUser.type}}
+                    </div>
+                </div>
+
                 <div>
                     <div class="label">
                         <span>Website</span>
@@ -63,7 +72,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div *ngIf="!userIsAcademic()">
                     <div class="label">
                         <span>Industries</span>
                     </div>
@@ -81,19 +90,46 @@
                 </div>
             </div>
 
+
             <!-- Edit form -->
             <form #form1="ngForm" [formGroup]="formGroup" (ngSubmit)="onSaveData()" *ngIf="isUpdateFormVisible">
-                <div>
+                <div *ngIf="!userIsAcademic()">
                     <mat-form-field appearance="fill" style="width: 300px;">
                         <mat-label>Company name</mat-label>
                         <input matInput placeholder="Company name" formControlName="firstCtrl" required>
                     </mat-form-field>
                 </div>
 
-                <div>
+                <div *ngIf="!userIsAcademic()">
                     <mat-form-field appearance="fill" style="width: 400px;">
                         <mat-label>Company description</mat-label>
                         <textarea matInput placeholder="Company description" formControlName="secondCtrl" rows="6"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="userIsAcademic()">
+                    <mat-form-field appearance="fill" style="width: 300px;">
+                        <mat-label>Institution name</mat-label>
+                        <input matInput placeholder="Institution name" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="userIsAcademic()">
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Institution description</mat-label>
+                        <textarea matInput placeholder="Institution description" formControlName="secondCtrl" rows="6"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="userIsAcademic()">
+                    <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="eighthCtrl" required>
+                            <mat-option value="School">School</mat-option>
+                            <mat-option value="Institute">Institute</mat-option>
+                            <mat-option value="University">University</mat-option>
+                            <mat-option value="Other">Other</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
 
@@ -113,6 +149,7 @@
 
                 <div>
                     <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>External links</mat-label>
                         <mat-chip-list #urlList class="mat-chip-list-stacked">
                             <mat-chip *ngFor="let url of urls"
                                     [removable]="true" (removed)="removeUrl(url)">
@@ -132,6 +169,7 @@
 
                 <div>
                     <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Countries</mat-label>
                         <mat-chip-list #countryList>
                             <mat-chip *ngFor="let country of selectedCountries"
                                     [removable]="true" (removed)="removeCountry(country)">
@@ -139,7 +177,7 @@
                                 <mat-icon matChipRemove>cancel</mat-icon>
                             </mat-chip>
                             <input #countryInput
-                                    placeholder="Countries"
+                                    placeholder="Select countries from autocomplete list"
                                     formControlName="sixthCtrl"
                                     [matChipInputFor]="countryList"
                                     [matAutocomplete]="autoCountries">
@@ -153,8 +191,9 @@
                     </mat-form-field>
                 </div>
 
-                <div>
+                <div *ngIf="!userIsAcademic()">
                     <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Industries</mat-label>
                         <mat-chip-list #industryList>
                             <mat-chip *ngFor="let industry of selectedIndustries"
                                     [removable]="true" (removed)="removeIndustry(industry)">
@@ -162,7 +201,7 @@
                                 <mat-icon matChipRemove>cancel</mat-icon>
                             </mat-chip>
                             <input #industryInput
-                                    placeholder="Industry sector"
+                                    placeholder="Select industries from autocomplete list"
                                     formControlName="seventhCtrl"
                                     [matChipInputFor]="industryList"
                                     [matAutocomplete]="autoIndustries">
@@ -186,7 +225,7 @@
 
     </mat-card>
 
-    <div *ngIf="userIsProvider" style="margin-top: 50px;">
+    <div *ngIf="userIsProvider()" style="margin-top: 50px;">
         <h2 class="bold gray-600" style="width: 92%; margin: 45px auto 10px;">
             Services
         </h2>

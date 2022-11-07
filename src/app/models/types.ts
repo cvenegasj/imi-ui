@@ -10,16 +10,20 @@ export class Client {
     industries: string[] = [];
     imis: Imi[] = [];
 
-    calculateIMI(): number {
-        if (this.imis.length === 0) { return 0; }
-        const lastImi = this.imis[this.imis.length - 1];
-        const n = lastImi.vars.size;
-        let sum = 0;
-
-        for (let value of lastImi.vars.values()) {
-            sum += value;
+    //constructor();
+    constructor(data?: any) {
+        if (data) {
+            this.id = data.id;
+            this.email = data.email;
+            this.companyName = data.companyName;
+            this.description = data.description;
+            this.phone = data.phone;
+            this.website = data.website;
+            this.extraUrls = data.extraUrls;
+            this.countries = data.countries;
+            this.industries = data.industries;
+            this.imis = data.imis;
         }
-        return sum / n;
     }
 }
 
@@ -36,17 +40,51 @@ export class Provider {
     imis: Imi[] = [];
     services: Map<number, string[]> = new Map();
 
-    /*calculateIMI(): number {
-        if (this.imis.length === 0) { return 0; }
-        const lastImi = this.imis[this.imis.length - 1];
-        const n = lastImi.vars.size;
-        let sum = 0;
-
-        for (let value of lastImi.vars.values()) {
-            sum += value;
+    //constructor();
+    constructor(data?: any) {
+        if (data) {
+            this.id = data.id;
+            this.email = data.email;
+            this.companyName = data.companyName;
+            this.description = data.description;
+            this.phone = data.phone;
+            this.website = data.website;
+            this.extraUrls = data.extraUrls;
+            this.countries = data.countries;
+            this.industries = data.industries;
+            this.imis = data.imis;
+            this.services = data.services;
         }
-        return sum / n;
-    } */
+    }
+}
+
+export class Academic {
+    id?: string;
+    email: string = '';
+    companyName: string = '';
+    type: string = '';
+    description?: string;
+    phone?: string;
+    website?: string;
+    extraUrls?: string[] = [];
+    countries: string[] = [];
+    imis: Imi[] = [];
+
+    //constructor();
+    constructor(data?: any) {
+        if (data) {
+            this.id = data.id;
+            this.email = data.email;
+            this.companyName = data.companyName;
+            this.type = data.type;
+            this.description = data.description;
+            this.phone = data.phone;
+            this.website = data.website;
+            this.extraUrls = data.extraUrls;
+            this.countries = data.countries;
+            this.imis = data.imis;
+        }
+    }
 }
 
 export class Imi {

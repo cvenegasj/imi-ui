@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Util } from '../utils/util';
+import { Provider, Client, Academic } from '../models/types';
+import { AcademicService } from '../services/academic.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,8 +23,8 @@ import { Util } from '../utils/util';
 })
 export class ProfileComponent implements OnInit {
 
-  appUser: any; // can be Client or Provider
-  userIsProvider: boolean = false;
+  appUser: any; // can be Client or Provider or Academic
+  //userIsProvider: boolean = false;
 
   isUpdateFormVisible = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -48,6 +50,7 @@ export class ProfileComponent implements OnInit {
     public auth: AuthService,
     private clientService: ClientService,
     private providerService: ProviderService,
+    private academicService: AcademicService,
     public sharedService: SharedService,
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -60,12 +63,13 @@ export class ProfileComponent implements OnInit {
         fifthCtrl: [''], // urls
         sixthCtrl: [''], // countries
         seventhCtrl: [''], // industries
+        eighthCtrl: [''] // type for Academic
       });
 
       this.sharedService.appUser$
         .subscribe(appUser => {
           this.appUser = appUser;
-          this.userIsProvider = appUser.services ? true : false;
+          // this.userIsProvider = appUser instanceof Provider;
 
           this.formGroup.get('firstCtrl')!.setValue(this.appUser.companyName);
           this.formGroup.get('secondCtrl')!.setValue(this.appUser.description);
@@ -74,7 +78,12 @@ export class ProfileComponent implements OnInit {
           
           this.urls = this.appUser.extraUrls;
           this.selectedCountries = this.appUser.countries;
-          this.selectedIndustries = this.appUser.industries; 
+
+          if (this.appUser instanceof Academic) {
+            this.formGroup.get('eighthCtrl')!.setValue(this.appUser.type);
+          } else {
+            this.selectedIndustries = this.appUser.industries;
+          }
         });
 
       // filters for autocomplete controls
@@ -156,10 +165,11 @@ export class ProfileComponent implements OnInit {
     this.appUser.phone = this.formGroup.get('thirdCtrl')!.value;
     this.appUser.website = this.formGroup.get('fourthCtrl')!.value;
     this.appUser.extraUrls = this.urls;
-    this.appUser.countries = this.selectedCountries;
-    this.appUser.industries = this.selectedIndustries;
+    
+    if (this.appUser instanceof Provider) { // is provider
+      this.appUser.countries = this.selectedCountries;
+      this.appUser.industries = this.selectedIndustries;
 
-    if (this.appUser.services) { // is provider
       this.providerService.update(this.appUser)
         .subscribe(res => {
           this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
@@ -167,9 +177,21 @@ export class ProfileComponent implements OnInit {
           });
           this.isUpdateFormVisible = false;
         });
+    } else if (this.appUser instanceof Client) { // is client
+      this.appUser.countries = this.selectedCountries;
+      this.appUser.industries = this.selectedIndustries;
 
-    } else { // is client
       this.clientService.update(this.appUser)
+        .subscribe(res => {
+          this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
+            duration: 2000,
+          });
+          this.isUpdateFormVisible = false;
+        });
+    } else { // is academic
+      this.appUser.type = this.formGroup.get('eighthCtrl')!.value;
+
+      this.academicService.update(this.appUser)
         .subscribe(res => {
           this._snackBar.open('Se guardaron los datos correctamente.', 'ok', {
             duration: 2000,
@@ -179,4 +201,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  userIsClient(): boolean {
+    return this.appUser instanceof Client;
+  }
+
+  userIsProvider(): boolean {
+    return this.appUser instanceof Provider;
+  }
+
+  userIsAcademic(): boolean {
+    return this.appUser instanceof Academic;
+  }
 }

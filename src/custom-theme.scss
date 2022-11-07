@@ -1,5 +1,4 @@
 // Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
@@ -23,3 +22,18 @@ $imi-ui-theme: mat-light-theme($imi-ui-primary, $imi-ui-accent, $imi-ui-warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($imi-ui-theme);
+
+.complete-signup-btn-company {
+    background: mat-color($mat-light-green, A100);
+    color: mat-color($mat-light-green, A100-contrast);
+}
+
+.complete-signup-btn-tech-provider {
+    background: mat-color($mat-green, A200);
+    color: mat-color($mat-green, A200-contrast);
+}
+
+.complete-signup-btn-academic {
+    background: mat-color($mat-deep-purple, A100);
+    color: mat-color($mat-deep-purple, A100-contrast);
+}

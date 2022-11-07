@@ -3,9 +3,9 @@
     <mat-stepper linear #stepper style="width: 80%; flex: 1 1 auto; margin: 0 auto;">
         <mat-step label="User type">
             <div class="centered" style="margin-top: 20px;">
-                <p class="font-20" style="margin-bottom: 20px;">Sign up as</p>
+                <p class="font-20" style="margin-bottom: 20px;">Sign Up As</p>
 
-                <button mat-raised-button color="accent" style="margin-right: 10px; height: 140px; width: 170px;" (click)="setUserType('client')">
+                <button mat-raised-button class="complete-signup-btn-company" style="margin-right: 10px; height: 140px; width: 170px;" (click)="setUserType('client')">
                     <mat-icon style="font-size: 35px; line-height: normal; position: relative; left: -6px;">verified</mat-icon>
                     <br />
                     <span class="btn-title">COMPANY</span>
@@ -13,32 +13,74 @@
                     <p class="btn-subtitle">I want to measure my industrial maturity level</p>
                 </button>
                 
-                <button mat-raised-button color="accent" style="height: 140px; width: 170px;" (click)="setUserType('provider')">
+                <button mat-raised-button class="complete-signup-btn-tech-provider" style="margin-right: 10px; height: 140px; width: 170px;" (click)="setUserType('provider')">
                     <mat-icon style="font-size: 35px; line-height: normal; position: relative; left: -6px;">star_rate</mat-icon>
                     <br />
                     <span class="btn-title">TECH PROVIDER</span>
                     <br />
                     <p class="btn-subtitle">I provide industrial technologies or services</p>
                 </button>
+
+                <button mat-raised-button class="complete-signup-btn-academic" style="height: 140px; width: 170px;" (click)="setUserType('academic')">
+                    <mat-icon style="font-size: 35px; line-height: normal; position: relative; left: -6px;">school</mat-icon>
+                    <br />
+                    <span class="btn-title">ACADEMIC</span>
+                    <br />
+                    <p class="btn-subtitle">I want to use it for educational/research purposes</p>
+                </button>
             </div>
         </mat-step>
 
         <mat-step [stepControl]="firstFormGroup" label="Company data">
             <form #form1="ngForm" [formGroup]="firstFormGroup" style="margin-top: 20px; padding: 0 40px;">
-                <div>
-                    <mat-form-field appearance="fill" style="width: 300px;">
-                        <mat-label>Company name</mat-label>
-                        <input matInput placeholder="Company name" formControlName="firstCtrl" required>
-                    </mat-form-field>
-                </div>
 
-                <div>
-                    <mat-form-field appearance="fill" style="width: 400px;">
-                        <mat-label>Company description</mat-label>
-                        <textarea matInput placeholder="Company description" formControlName="secondCtrl" rows="6"></textarea>
-                    </mat-form-field>
-                </div>
+                <!-- Fields for academics -->
+                <ng-template [ngIf]="userType === 'academic'" [ngIfElse]="companyBlock">
+                    <div>
+                        <mat-form-field appearance="fill" style="width: 300px;">
+                            <mat-label>Institution name</mat-label>
+                            <input matInput placeholder="Institution name" formControlName="firstCtrl" required>
+                        </mat-form-field>
+                    </div>
 
+                    <div>
+                        <mat-form-field appearance="fill" style="width: 400px;">
+                            <mat-label>Type</mat-label>
+                            <mat-select formControlName="eighthCtrl" required>
+                                <mat-option value="school">School</mat-option>
+                                <mat-option value="school">Institute</mat-option>
+                                <mat-option value="school">University</mat-option>
+                                <mat-option value="school">Other</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <div>
+                        <mat-form-field appearance="fill" style="width: 400px;">
+                            <mat-label>Institution description</mat-label>
+                            <textarea matInput placeholder="Institution description" formControlName="secondCtrl" rows="6"></textarea>
+                        </mat-form-field>
+                    </div>
+                </ng-template>
+
+                <!-- Fields for companies -->
+                <ng-template #companyBlock>
+                    <div>
+                        <mat-form-field appearance="fill" style="width: 300px;">
+                            <mat-label>Company name</mat-label>
+                            <input matInput placeholder="Company name" formControlName="firstCtrl" required>
+                        </mat-form-field>
+                    </div>
+    
+                    <div>
+                        <mat-form-field appearance="fill" style="width: 400px;">
+                            <mat-label>Company description</mat-label>
+                            <textarea matInput placeholder="Company description" formControlName="secondCtrl" rows="6"></textarea>
+                        </mat-form-field>
+                    </div>
+                </ng-template>
+
+                <!-- Common fields -->
                 <div>
                     <mat-form-field appearance="fill" style="width: 300px;">
                         <mat-label>Contact phone</mat-label>
@@ -55,6 +97,7 @@
 
                 <div>
                     <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>External links</mat-label>
                         <mat-chip-list #urlList class="mat-chip-list-stacked">
                             <mat-chip *ngFor="let url of urls"
                                     [removable]="true" (removed)="removeUrl(url)">
@@ -74,6 +117,7 @@
 
                 <div>
                     <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Countries</mat-label>
                         <mat-chip-list #countryList>
                             <mat-chip *ngFor="let country of selectedCountries"
                                     [removable]="true" (removed)="removeCountry(country)">
@@ -81,7 +125,7 @@
                                 <mat-icon matChipRemove>cancel</mat-icon>
                             </mat-chip>
                             <input #countryInput
-                                    placeholder="Countries"
+                                    placeholder="Select from autocomplete list"
                                     formControlName="sixthCtrl"
                                     [matChipInputFor]="countryList"
                                     [matAutocomplete]="autoCountries">
@@ -95,8 +139,9 @@
                     </mat-form-field>
                 </div>
 
-                <div>
+                <div *ngIf="userType !== 'academic'">
                     <mat-form-field appearance="fill" style="width: 400px;">
+                        <mat-label>Industry sector</mat-label>
                         <mat-chip-list #industryList>
                             <mat-chip *ngFor="let industry of selectedIndustries"
                                     [removable]="true" (removed)="removeIndustry(industry)">
@@ -104,7 +149,7 @@
                                 <mat-icon matChipRemove>cancel</mat-icon>
                             </mat-chip>
                             <input #industryInput
-                                    placeholder="Industry sector"
+                                    placeholder="Select from autocomplete list"
                                     formControlName="seventhCtrl"
                                     [matChipInputFor]="industryList"
                                     [matAutocomplete]="autoIndustries">
@@ -119,7 +164,7 @@
                 </div>
 
                 <div>
-                    <button mat-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-button matStepperPrevious>Back</button>
                     <button mat-button color="accent" (click)="finishSignUp()" [disabled]="!(form1.valid)">Done</button>
                 </div>
             </form>

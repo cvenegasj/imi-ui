@@ -8,13 +8,14 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { concatMap, map, startWith } from 'rxjs/operators';
 
-import { Client, Provider } from '../models/types';
+import { Academic, Client, Provider } from '../models/types';
 import { AuthService } from '@auth0/auth0-angular';
 import { ClientService } from '../services/client.service';
 import { ProviderService } from '../services/provider.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { SharedService } from '../services/shared.service';
 import { Util } from '../utils/util';
+import { AcademicService } from '../services/academic.service';
 
 @Component({
   selector: 'app-complete-signup',
@@ -33,7 +34,7 @@ export class CompleteSignupComponent implements OnInit {
   countryInput!: ElementRef<HTMLInputElement>;
 
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  //secondFormGroup: FormGroup;
   userType: string = '';
 
   countries: string[] = Util.COUNTRY_LIST;
@@ -50,6 +51,7 @@ export class CompleteSignupComponent implements OnInit {
     private auth: AuthService,
     private clientService: ClientService,
     private providerService: ProviderService,
+    private academicService: AcademicService,
     private sharedService: SharedService,
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -64,24 +66,25 @@ export class CompleteSignupComponent implements OnInit {
       fifthCtrl: [''],
       sixthCtrl: [''],
       seventhCtrl: [''],
+      eighthCtrl: ['', Validators.required],
     });
 
-    this.secondFormGroup = this._formBuilder.group({
-      slider1Ctrl: [3, Validators.required],
-      slider2Ctrl: [3, Validators.required],
-      slider3Ctrl: [3, Validators.required],
-      slider4Ctrl: [3, Validators.required],
-      slider5Ctrl: [3, Validators.required],
-      slider6Ctrl: [3, Validators.required],
-      slider7Ctrl: [3, Validators.required],
-      slider8Ctrl: [3, Validators.required],
-      slider9Ctrl: [3, Validators.required],
-      slider10Ctrl: [3, Validators.required],
-      slider11Ctrl: [3, Validators.required],
-      slider12Ctrl: [3, Validators.required],
-      slider13Ctrl: [3, Validators.required],
-      slider14Ctrl: [3, Validators.required]
-    });
+    // this.secondFormGroup = this._formBuilder.group({
+    //   slider1Ctrl: [3, Validators.required],
+    //   slider2Ctrl: [3, Validators.required],
+    //   slider3Ctrl: [3, Validators.required],
+    //   slider4Ctrl: [3, Validators.required],
+    //   slider5Ctrl: [3, Validators.required],
+    //   slider6Ctrl: [3, Validators.required],
+    //   slider7Ctrl: [3, Validators.required],
+    //   slider8Ctrl: [3, Validators.required],
+    //   slider9Ctrl: [3, Validators.required],
+    //   slider10Ctrl: [3, Validators.required],
+    //   slider11Ctrl: [3, Validators.required],
+    //   slider12Ctrl: [3, Validators.required],
+    //   slider13Ctrl: [3, Validators.required],
+    //   slider14Ctrl: [3, Validators.required]
+    // });
 
     // filters for autocomplete controls
     this.filteredCountries = this.firstFormGroup.get('sixthCtrl')!.valueChanges
@@ -192,7 +195,7 @@ export class CompleteSignupComponent implements OnInit {
             });
           }
         });
-    } else {
+    } else if (this.userType === 'provider') {
       this.auth.user$
         .pipe(
           concatMap(user => {
@@ -227,11 +230,40 @@ export class CompleteSignupComponent implements OnInit {
             });
           }
         });
+    } else { // academic
+      this.auth.user$
+        .pipe(
+          concatMap(user => {
+            let newAcademic = this.getAcademicObject();
+            newAcademic.email = user!.email!;
+            return this.academicService.create(newAcademic);
+          })
+        )
+        .subscribe(a => {
+          if (a) {
+            //console.log(p);
+            // imis
+            for (let i = 0; i < a.imis.length; i++) {
+              let tempMap = new Map();
+              for (let [key, value] of Object.entries(a.imis[i].vars)) {
+                tempMap.set(+key, value);
+              }
+              a.imis[i].vars = tempMap;
+            }
+      
+            this.sharedService.nextAppUser(a as Academic);
+            this.router.navigate(['/dashboard']);
+          } else {
+            this._snackBar.open('An error occurred. Please, try again.', 'ok', {
+              duration: 3000,
+            });
+          }
+        });
     }
   }
 
   getClientObject(): Client {
-    let client = new Client();
+    const client = new Client();
     client.companyName = this.firstFormGroup.get('firstCtrl')!.value;
     client.description = this.firstFormGroup.get('secondCtrl')!.value;
     client.phone = this.firstFormGroup.get('thirdCtrl')!.value;
@@ -239,11 +271,12 @@ export class CompleteSignupComponent implements OnInit {
     client.extraUrls = this.urls;
     client.countries = this.selectedCountries;
     client.industries = this.selectedIndustries;
+
     return client;
   }
 
   getProviderObject(): Provider {
-    let provider = new Provider();
+    const provider = new Provider();
     provider.companyName = this.firstFormGroup.get('firstCtrl')!.value;
     provider.description = this.firstFormGroup.get('secondCtrl')!.value;
     provider.phone = this.firstFormGroup.get('thirdCtrl')!.value;
@@ -251,7 +284,21 @@ export class CompleteSignupComponent implements OnInit {
     provider.extraUrls = this.urls;
     provider.countries = this.selectedCountries;
     provider.industries = this.selectedIndustries;
+
     return provider;
+  }
+
+  getAcademicObject(): Academic {
+    const academic = new Academic();
+    academic.companyName = this.firstFormGroup.get('firstCtrl')!.value;
+    academic.description = this.firstFormGroup.get('secondCtrl')!.value;
+    academic.phone = this.firstFormGroup.get('thirdCtrl')!.value;
+    academic.website = this.firstFormGroup.get('fourthCtrl')!.value;
+    academic.extraUrls = this.urls;
+    academic.countries = this.selectedCountries;
+    academic.type = this.firstFormGroup.get('eighthCtrl')!.value;
+
+    return academic;
   }
 
 }

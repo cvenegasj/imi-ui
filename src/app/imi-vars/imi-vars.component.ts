@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
-import { DimensionsType, Imi } from '../models/types';
+import { Client, DimensionsType, Imi, Provider } from '../models/types';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -11,6 +11,7 @@ import { ClientService } from '../services/client.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { AcademicService } from '../services/academic.service';
 
 @Component({
   selector: 'app-imi-vars',
@@ -82,6 +83,7 @@ export class ImiVarsComponent implements OnInit {
     private sharedService: SharedService,
     private providerService: ProviderService,
     private clientService: ClientService,
+    private academicService: AcademicService,
     private _snackBar: MatSnackBar,
   ) {
     this.dimensions = {
@@ -184,8 +186,8 @@ export class ImiVarsComponent implements OnInit {
       [15, this.sliderValues.value15]
     ]);
 
-    if (this.appUser.services) { // is provider
-      this.providerService.updateImi(this.appUser.id, mapVars)
+    if (this.appUser instanceof Provider) { // is provider
+      this.providerService.updateImi(this.appUser.id!, mapVars)
         .subscribe(appUser => {
           // provider's services
           let mapServices: Map<number, string[]> = new Map();
@@ -215,8 +217,32 @@ export class ImiVarsComponent implements OnInit {
           console.log("Updated!");
         });
 
-    } else { // is client
-      this.clientService.updateImi(this.appUser.id, mapVars)
+    } else if (this.appUser instanceof Client) { // is client
+      this.clientService.updateImi(this.appUser.id!, mapVars)
+        .subscribe(appUser => {
+          // imis
+          for (let i = 0; i < appUser.imis.length; i++) {
+            let tempMap = new Map();
+            for (let [key, value] of Object.entries(appUser.imis[i].vars)) {
+              tempMap.set(+key, value);
+            }
+            appUser.imis[i].vars = tempMap;
+          }
+
+          this.sharedService.nextAppUser(appUser);
+          this.appUser = appUser;
+          
+          const imiScore = this.updateVarsAndData();
+          this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
+          this.cleanAndCreateChart(); // redraw radar chart
+
+          this._snackBar.open('Data saved correctly.', 'ok', {
+            duration: 2000,
+          });
+          console.log("Updated!");
+        });
+    } else { // is Academic
+      this.academicService.updateImi(this.appUser.id!, mapVars)
         .subscribe(appUser => {
           // imis
           for (let i = 0; i < appUser.imis.length; i++) {

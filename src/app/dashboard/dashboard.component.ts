@@ -77,5 +77,4 @@ export class DashboardComponent implements OnInit {
   setImiScore(score: number): void {
     this.imiScore = score;
   }
-
 }
