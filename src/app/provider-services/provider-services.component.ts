@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Provider } from '../models/types';
 
 import { ProviderService } from '../services/provider.service';
 import { SharedService } from '../services/shared.service';
@@ -98,8 +99,10 @@ export class ProviderServicesComponent implements OnInit {
 
     this.providerService.updateServices(this.appUser.id, userServices)
       .subscribe(res => {
+        // const user: Provider = new Provider(res);
+
         this.appUser.services = userServices;
-        //console.log(this.appUser);
+
         this.sharedService.nextAppUser(this.appUser); // update appUser object in session
         this._snackBar.open('Data saved correctly.', 'ok', {
           duration: 2000,

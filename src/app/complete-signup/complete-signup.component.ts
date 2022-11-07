@@ -177,17 +177,18 @@ export class CompleteSignupComponent implements OnInit {
         )
         .subscribe(c => {
           if (c) {
-            //console.log(result);
+            const user: Client = new Client(c);
+
             // imis
-            for (let i = 0; i < c.imis.length; i++) {
+            for (let i = 0; i < user.imis.length; i++) {
               let tempMap = new Map();
-              for (let [key, value] of Object.entries(c.imis[i].vars)) {
+              for (let [key, value] of Object.entries(user.imis[i].vars)) {
                 tempMap.set(+key, value);
               }
-              c.imis[i].vars = tempMap;
+              user.imis[i].vars = tempMap;
             }
 
-            this.sharedService.nextAppUser(c as Client);
+            this.sharedService.nextAppUser(user);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('An error occurred. Please, try again.', 'ok', {
@@ -206,23 +207,24 @@ export class CompleteSignupComponent implements OnInit {
         )
         .subscribe(p => {
           if (p) {
-            //console.log(p);
+            const user: Provider = new Provider(p);
+
             // provider's services
             let mapServices: Map<number, string[]> = new Map();
-            for (let [key, value] of Object.entries(p.services)) {
+            for (let [key, value] of Object.entries(user.services)) {
               mapServices.set(+key, value);
             }
-            p.services = mapServices;
+            user.services = mapServices;
             // imis
-            for (let i = 0; i < p.imis.length; i++) {
+            for (let i = 0; i < user.imis.length; i++) {
               let tempMap = new Map();
-              for (let [key, value] of Object.entries(p.imis[i].vars)) {
+              for (let [key, value] of Object.entries(user.imis[i].vars)) {
                 tempMap.set(+key, value);
               }
-              p.imis[i].vars = tempMap;
+              user.imis[i].vars = tempMap;
             }
       
-            this.sharedService.nextAppUser(p as Provider);
+            this.sharedService.nextAppUser(user);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('An error occurred. Please, try again.', 'ok', {
@@ -231,6 +233,8 @@ export class CompleteSignupComponent implements OnInit {
           }
         });
     } else { // academic
+      console.log('academic user');
+
       this.auth.user$
         .pipe(
           concatMap(user => {
@@ -241,17 +245,18 @@ export class CompleteSignupComponent implements OnInit {
         )
         .subscribe(a => {
           if (a) {
-            //console.log(p);
+            const user: Academic = new Academic(a);
+
             // imis
-            for (let i = 0; i < a.imis.length; i++) {
+            for (let i = 0; i < user.imis.length; i++) {
               let tempMap = new Map();
-              for (let [key, value] of Object.entries(a.imis[i].vars)) {
+              for (let [key, value] of Object.entries(user.imis[i].vars)) {
                 tempMap.set(+key, value);
               }
-              a.imis[i].vars = tempMap;
+              user.imis[i].vars = tempMap;
             }
       
-            this.sharedService.nextAppUser(a as Academic);
+            this.sharedService.nextAppUser(user);
             this.router.navigate(['/dashboard']);
           } else {
             this._snackBar.open('An error occurred. Please, try again.', 'ok', {
@@ -263,42 +268,42 @@ export class CompleteSignupComponent implements OnInit {
   }
 
   getClientObject(): Client {
-    const client = new Client();
-    client.companyName = this.firstFormGroup.get('firstCtrl')!.value;
-    client.description = this.firstFormGroup.get('secondCtrl')!.value;
-    client.phone = this.firstFormGroup.get('thirdCtrl')!.value;
-    client.website = this.firstFormGroup.get('fourthCtrl')!.value;
-    client.extraUrls = this.urls;
-    client.countries = this.selectedCountries;
-    client.industries = this.selectedIndustries;
+    const data: any = {};
+    data.companyName = this.firstFormGroup.get('firstCtrl')!.value;
+    data.description = this.firstFormGroup.get('secondCtrl')!.value;
+    data.phone = this.firstFormGroup.get('thirdCtrl')!.value;
+    data.website = this.firstFormGroup.get('fourthCtrl')!.value;
+    data.extraUrls = this.urls;
+    data.countries = this.selectedCountries;
+    data.industries = this.selectedIndustries;
 
-    return client;
+    return new Client(data);
   }
 
   getProviderObject(): Provider {
-    const provider = new Provider();
-    provider.companyName = this.firstFormGroup.get('firstCtrl')!.value;
-    provider.description = this.firstFormGroup.get('secondCtrl')!.value;
-    provider.phone = this.firstFormGroup.get('thirdCtrl')!.value;
-    provider.website = this.firstFormGroup.get('fourthCtrl')!.value;
-    provider.extraUrls = this.urls;
-    provider.countries = this.selectedCountries;
-    provider.industries = this.selectedIndustries;
+    const data: any = {};
+    data.companyName = this.firstFormGroup.get('firstCtrl')!.value;
+    data.description = this.firstFormGroup.get('secondCtrl')!.value;
+    data.phone = this.firstFormGroup.get('thirdCtrl')!.value;
+    data.website = this.firstFormGroup.get('fourthCtrl')!.value;
+    data.extraUrls = this.urls;
+    data.countries = this.selectedCountries;
+    data.industries = this.selectedIndustries;
 
-    return provider;
+    return new Provider(data);
   }
 
   getAcademicObject(): Academic {
-    const academic = new Academic();
-    academic.companyName = this.firstFormGroup.get('firstCtrl')!.value;
-    academic.description = this.firstFormGroup.get('secondCtrl')!.value;
-    academic.phone = this.firstFormGroup.get('thirdCtrl')!.value;
-    academic.website = this.firstFormGroup.get('fourthCtrl')!.value;
-    academic.extraUrls = this.urls;
-    academic.countries = this.selectedCountries;
-    academic.type = this.firstFormGroup.get('eighthCtrl')!.value;
+    const data: any = {};
+    data.companyName = this.firstFormGroup.get('firstCtrl')!.value;
+    data.description = this.firstFormGroup.get('secondCtrl')!.value;
+    data.phone = this.firstFormGroup.get('thirdCtrl')!.value;
+    data.website = this.firstFormGroup.get('fourthCtrl')!.value;
+    data.extraUrls = this.urls;
+    data.countries = this.selectedCountries;
+    data.type = this.firstFormGroup.get('eighthCtrl')!.value;
 
-    return academic;
+    return new Academic(data);
   }
 
 }

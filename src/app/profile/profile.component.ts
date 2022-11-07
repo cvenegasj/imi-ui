@@ -23,8 +23,7 @@ import { AcademicService } from '../services/academic.service';
 })
 export class ProfileComponent implements OnInit {
 
-  appUser: any; // can be Client or Provider or Academic
-  //userIsProvider: boolean = false;
+  appUser: any; // can be Client, Provider, or Academic
 
   isUpdateFormVisible = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -69,7 +68,6 @@ export class ProfileComponent implements OnInit {
       this.sharedService.appUser$
         .subscribe(appUser => {
           this.appUser = appUser;
-          // this.userIsProvider = appUser instanceof Provider;
 
           this.formGroup.get('firstCtrl')!.setValue(this.appUser.companyName);
           this.formGroup.get('secondCtrl')!.setValue(this.appUser.description);
