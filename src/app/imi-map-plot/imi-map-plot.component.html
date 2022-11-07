@@ -6,6 +6,10 @@
 
     <mat-card class="card-1" style="margin-bottom: 100px;">
         <mat-card-content style="padding: 50px;">
+
+            <div *ngIf="showLoader" class="centered loading" style="margin-bottom: 40px;">
+                <img src="/assets/loading.svg" alt="Loading animation" />
+            </div>
             
             <div #chartContainer>
                 <div id="tooltip" class="tooltip">

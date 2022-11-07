@@ -17,6 +17,8 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
 })
 export class ImiMapPlotComponent implements OnInit {
 
+  showLoader: boolean = true;
+
   @ViewChild('chartContainer', {static: true}) 
   chartContainer!: ElementRef;
 
@@ -91,10 +93,12 @@ export class ImiMapPlotComponent implements OnInit {
         imiData: this.clientService.getAllCountriesImiForDisplay(),
       })
       .subscribe(res => {
-          this.countryShapes = res.geoData;
-          this.data = res.imiData;
+        this.showLoader = false;
 
-          this.cleanAndCreateChart();
+        this.countryShapes = res.geoData;
+        this.data = res.imiData;
+
+        this.cleanAndCreateChart();
     });
   }
 

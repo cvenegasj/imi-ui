@@ -66,7 +66,7 @@ export class CompleteSignupComponent implements OnInit {
       fifthCtrl: [''],
       sixthCtrl: [''],
       seventhCtrl: [''],
-      eighthCtrl: ['', Validators.required],
+      eighthCtrl: [''],
     });
 
     // this.secondFormGroup = this._formBuilder.group({
