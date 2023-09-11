@@ -24,7 +24,7 @@
                 <mat-icon>settings</mat-icon>
                 <span>Configuraciones</span>
             </button> -->
-            <button mat-menu-item (click)="auth.logout({ returnTo: document.location.origin })">
+            <button mat-menu-item (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
                 <mat-icon>exit_to_app</mat-icon>
                 <span>Salir</span>
             </button>

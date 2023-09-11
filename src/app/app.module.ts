@@ -44,7 +44,10 @@ import { ImiMapPlotComponent } from './imi-map-plot/imi-map-plot.component';
     HttpClientModule,
     AuthModule.forRoot({
       domain: 'symbiocreation.auth0.com',
-      clientId: 'biZYk7qdeMeay5gDWODOg0A707P2JEnR'
+      clientId: 'biZYk7qdeMeay5gDWODOg0A707P2JEnR',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
     }),
     LinkyModule,
     
