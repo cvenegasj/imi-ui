@@ -11,7 +11,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $imi-ui-primary: mat-palette($mat-deep-purple, A400, A200, A700);
-$imi-ui-accent: mat-palette($mat-green, A400, A200, A470);
+$imi-ui-accent: mat-palette($mat-green, A400, A200, A400);
 // The warn palette is optional (defaults to red).
 $imi-ui-warn: mat-palette($mat-red);
 
