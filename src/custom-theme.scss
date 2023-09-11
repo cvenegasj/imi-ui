@@ -1,25 +1,32 @@
 @use '@angular/material' as mat;
-// @include mat.core();
 
-$imi-ui-primary: mat.define-palette(mat.$deep-purple, A400, A200, A700);
-$imi-ui-accent: mat.define-palette(mat.$green, A400, A200, A400);
-$imi-ui-warn: mat.define-palette(mat.$red);
+@include mat.core();
 
-$imi-ui-theme: mat-light-theme($imi-ui-primary, $imi-ui-accent, $imi-ui-warn);
+$imi-ui-primary: mat.define-palette(mat.$deep-purple-palette, A400, A200, A700);
+$imi-ui-accent: mat.define-palette(mat.$green-palette, A400, A200, A400);
+$imi-ui-warn: mat.define-palette(mat.$red-palette);
 
-// @include mat.all-component-themes($imi-ui-theme);
+$imi-ui-theme: mat.define-light-theme((
+ color: (
+   primary: $imi-ui-primary,
+   accent: $imi-ui-accent,
+   warn: $imi-ui-warn,
+ ),
+));
+
+@include mat.all-component-themes($imi-ui-theme);
 
 .complete-signup-btn-company {
-    background: mat-color($mat-light-green, A100);
-    color: mat-color($mat-light-green, A100-contrast);
+    background: mat.get-color-from-palette(mat.$light-green-palette, A100);
+    color: mat.get-color-from-palette(mat.$light-green-palette, A100-contrast);
 }
 
 .complete-signup-btn-tech-provider {
-    background: mat-color($mat-green, A200);
-    color: mat-color($mat-green, A200-contrast);
+    background: mat.get-color-from-palette(mat.$green-palette, A200);
+    color: mat.get-color-from-palette(mat.$green-palette, A200-contrast);
 }
 
 .complete-signup-btn-academic {
-    background: mat-color($mat-deep-purple, A100);
-    color: mat-color($mat-deep-purple, A100-contrast);
+    background: mat.get-color-from-palette(mat.$deep-purple-palette, A100);
+    color: mat.get-color-from-palette(mat.$deep-purple-palette, A100-contrast);
 }
