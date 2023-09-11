@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { concatMap } from 'rxjs/operators';
 import { Provider } from '../models/types';
 import { ProviderDetailDialogComponent } from '../provider-detail-dialog/provider-detail-dialog.component';

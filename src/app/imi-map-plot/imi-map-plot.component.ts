@@ -7,7 +7,7 @@ import { Util } from '../utils/util';
 import { forkJoin, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
 import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Component({
