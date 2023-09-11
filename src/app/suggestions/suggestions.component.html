@@ -6,7 +6,7 @@
     
     <mat-card class="card-2" *ngFor="let p of suggestions">
         <mat-card-title class="font-17">
-            <a class="gray-50 link-hvr-underline ellipsed" (click)="openProviderDetailDialog(p)" [routerLink]="">
+            <a class="gray-50 link-hvr-underline ellipsed" (click)="openProviderDetailDialog(p)" [routerLink]="[]">
                 {{p.companyName}}
             </a>
         </mat-card-title>
