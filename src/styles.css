@@ -660,3 +660,17 @@ button p.btn-subtitle {
     font-size: 11px;
     font-weight: 400;
 }
+
+/* Estilos para todos los sliders */
+.mat-mdc-slider.mat-primary {
+    --mdc-slider-handle-color: #00C853;
+    --mdc-slider-focus-handle-color: #00C853;
+    --mdc-slider-hover-handle-color: #00C853;
+    --mdc-slider-active-track-color: #00C853;
+    --mdc-slider-inactive-track-color: #00C853;
+    --mdc-slider-with-tick-marks-active-container-color: #fff;
+    --mdc-slider-with-tick-marks-inactive-container-color: #00C853;
+    --mat-mdc-slider-ripple-color: #00C853;
+    --mat-mdc-slider-hover-ripple-color: rgba(101, 31, 255, 0.05);
+    --mat-mdc-slider-focus-ripple-color: rgba(101, 31, 255, 0.2);
+}

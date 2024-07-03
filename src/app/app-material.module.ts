@@ -11,7 +11,7 @@ import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/m
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips';
-import { MatLegacySliderModule as MatSliderModule } from '@angular/material/legacy-slider';
+// import { MatLegacySliderModule as MatSliderModule } from '@angular/material/legacy-slider';
 import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -20,6 +20,7 @@ import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/lega
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
     imports: [
