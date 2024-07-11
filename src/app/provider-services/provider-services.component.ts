@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Provider } from '../models/types';
 
 import { ProviderService } from '../services/provider.service';

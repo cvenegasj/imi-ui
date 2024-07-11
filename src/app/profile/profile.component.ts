@@ -9,7 +9,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { ClientService } from '../services/client.service';
 import { ProviderService } from '../services/provider.service';
 import { SharedService } from '../services/shared.service';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
 import { MatLegacyChipInputEvent as MatChipInputEvent } from '@angular/material/legacy-chips';
 import { Util } from '../utils/util';
@@ -136,7 +136,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  addUrl(event: MatChipInputEvent): void {
+  addUrl(event: any): void {
     const input = event.chipInput?.inputElement;
     const value = event.value;
     // Add the new url

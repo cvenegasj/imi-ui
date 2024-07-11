@@ -228,21 +228,21 @@
 
         </div>
 
-        <div style="margin-top: 30px; margin-right: 50px;">
+        <div style="margin-top: 30px; margin-right: 50px;flex: 1;">
             
-            <div #chartContainer></div>
+            <div #chartContainer style="text-align: center;"></div>
             
             <div fxLayout="row" style="margin: 0 0 10px 40px;">
                 
-                <mat-form-field appearance="fill" style="width: 200px; margin-right: 5px;">
+                <mat-form-field appearance="fill" style="margin-right: 5px;flex:1;">
                     <mat-label>Show country IMI</mat-label>
 
-                    <mat-chip-list #countryList>
-                        <mat-chip *ngFor="let country of selectedCountries" [removable]="true" (removed)="removeCountry()">
+                    <mat-chip-grid #countryList>
+                        <mat-chip-row class="country-chip" *ngFor="let country of selectedCountries" [removable]="true" (removed)="removeCountry()">
                             {{country}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                    </mat-chip-list>
+                            <mat-icon matChipRemove style="color: white;opacity: 0.75;">cancel</mat-icon>
+                        </mat-chip-row>
+                    </mat-chip-grid>
 
                     <input #countryInput matInput
                             placeholder="Type country"
@@ -258,15 +258,15 @@
 
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" style="width: 200px;">
+                <mat-form-field appearance="fill" style="flex:1;">
                     <mat-label>Show industry sector IMI</mat-label>
 
-                    <mat-chip-list #industryList>
-                        <mat-chip *ngFor="let industry of selectedIndustries" [removable]="true" (removed)="removeIndustry()">
+                    <mat-chip-grid #industryList>
+                        <mat-chip  class="industry-chip" *ngFor="let industry of selectedIndustries" [removable]="true" (removed)="removeIndustry()">
                             {{industry}}
                             <mat-icon matChipRemove>cancel</mat-icon>
                         </mat-chip>
-                    </mat-chip-list>
+                    </mat-chip-grid>
 
                     <input #industryInput matInput
                             placeholder="Type industry sector"

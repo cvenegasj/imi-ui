@@ -9,7 +9,7 @@ import { ProviderService } from '../services/provider.service';
 import { Util } from '../utils/util';
 import { ClientService } from '../services/client.service';
 
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
 import { AcademicService } from '../services/academic.service';
 

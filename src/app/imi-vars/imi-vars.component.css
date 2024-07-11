@@ -6,3 +6,13 @@
 .tooltip {
     fill: #333333;
 }
+
+.country-chip{
+    background-color: #cc333f !important;
+    --mdc-chip-label-text-color: #ffffff;
+}
+
+.industry-chip{
+    background-color: #edc951 !important;
+    --mdc-chip-label-text-color: #000000;
+}
