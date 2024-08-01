@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatStepper } from '@angular/material/stepper';
 import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { concatMap, map, startWith } from 'rxjs/operators';
@@ -144,7 +144,7 @@ export class CompleteSignupComponent implements OnInit {
     }
   }
 
-  addUrl(event: MatChipInputEvent): void {
+  addUrl(event: any): void {
     const input = event.chipInput?.inputElement;
     const value = event.value;
     // Add the new url

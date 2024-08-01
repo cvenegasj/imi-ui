@@ -150,7 +150,7 @@
                 <div>
                     <mat-form-field appearance="fill" style="width: 400px;">
                         <mat-label>External links</mat-label>
-                        <mat-chip-list #urlList class="mat-chip-list-stacked">
+                        <mat-chip-grid #urlList class="mat-chip-list-stacked">
                             <mat-chip *ngFor="let url of urls"
                                     [removable]="true" (removed)="removeUrl(url)">
                                 {{url}}
@@ -163,25 +163,25 @@
                                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                     [matChipInputAddOnBlur]="true"
                                     (matChipInputTokenEnd)="addUrl($event)">
-                        </mat-chip-list>
+                        </mat-chip-grid>
                     </mat-form-field>
                 </div>
 
                 <div>
                     <mat-form-field appearance="fill" style="width: 400px;">
                         <mat-label>Countries</mat-label>
-                        <mat-chip-list #countryList>
-                            <mat-chip *ngFor="let country of selectedCountries"
+                        <mat-chip-grid #countryList>
+                            <mat-chip-row *ngFor="let country of selectedCountries"
                                     [removable]="true" (removed)="removeCountry(country)">
                                 {{country}}
                                 <mat-icon matChipRemove>cancel</mat-icon>
-                            </mat-chip>
+                            </mat-chip-row>
                             <input #countryInput
                                     placeholder="Select countries from autocomplete list"
                                     formControlName="sixthCtrl"
                                     [matChipInputFor]="countryList"
                                     [matAutocomplete]="autoCountries">
-                        </mat-chip-list>
+                        </mat-chip-grid>
                         
                         <mat-autocomplete #autoCountries="matAutocomplete" (optionSelected)="selectCountry($event)">
                             <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
@@ -194,7 +194,7 @@
                 <div *ngIf="!userIsAcademic()">
                     <mat-form-field appearance="fill" style="width: 400px;">
                         <mat-label>Industries</mat-label>
-                        <mat-chip-list #industryList>
+                        <mat-chip-grid #industryList>
                             <mat-chip *ngFor="let industry of selectedIndustries"
                                     [removable]="true" (removed)="removeIndustry(industry)">
                                 {{industry}}
@@ -205,7 +205,7 @@
                                     formControlName="seventhCtrl"
                                     [matChipInputFor]="industryList"
                                     [matAutocomplete]="autoIndustries">
-                        </mat-chip-list>
+                        </mat-chip-grid>
 
                         <mat-autocomplete #autoIndustries="matAutocomplete" (optionSelected)="selectIndustry($event)">
                             <mat-option *ngFor="let industry of filteredIndustries | async" [value]="industry">

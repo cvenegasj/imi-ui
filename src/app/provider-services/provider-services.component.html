@@ -21,7 +21,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list1>
+                            <mat-chip-grid #list1>
                                 <mat-chip *ngFor="let service of selectedServices1"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -35,7 +35,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list1"
                                         [matAutocomplete]="autoComplete1">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete1="matAutocomplete" (optionSelected)="selectService1($event)">
                                 <mat-option *ngFor="let service of services1" [value]="service">
@@ -54,7 +54,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list2>
+                            <mat-chip-grid #list2>
                                 <mat-chip *ngFor="let service of selectedServices2"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -68,7 +68,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list2"
                                         [matAutocomplete]="autoComplete2">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete2="matAutocomplete" (optionSelected)="selectService2($event)">
                                 <mat-option *ngFor="let service of services2" [value]="service">
@@ -87,7 +87,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list3>
+                            <mat-chip-grid #list3>
                                 <mat-chip *ngFor="let service of selectedServices3"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -101,7 +101,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list3"
                                         [matAutocomplete]="autoComplete3">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete3="matAutocomplete" (optionSelected)="selectService3($event)">
                                 <mat-option *ngFor="let service of services3" [value]="service">
@@ -130,7 +130,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list4>
+                            <mat-chip-grid #list4>
                                 <mat-chip *ngFor="let service of selectedServices4"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -144,7 +144,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list4"
                                         [matAutocomplete]="autoComplete4">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete4="matAutocomplete" (optionSelected)="selectService4($event)">
                                 <mat-option *ngFor="let service of services4" [value]="service">
@@ -163,7 +163,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list5>
+                            <mat-chip-grid #list5>
                                 <mat-chip *ngFor="let service of selectedServices5"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -177,7 +177,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list5"
                                         [matAutocomplete]="autoComplete5">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete5="matAutocomplete" (optionSelected)="selectService5($event)">
                                 <mat-option *ngFor="let service of services5" [value]="service">
@@ -196,7 +196,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list6>
+                            <mat-chip-grid #list6>
                                 <mat-chip *ngFor="let service of selectedServices6"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -210,7 +210,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list6"
                                         [matAutocomplete]="autoComplete6">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete6="matAutocomplete" (optionSelected)="selectService6($event)">
                                 <mat-option *ngFor="let service of services6" [value]="service">
@@ -239,7 +239,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list7>
+                            <mat-chip-grid #list7>
                                 <mat-chip *ngFor="let service of selectedServices7"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -253,7 +253,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list7"
                                         [matAutocomplete]="autoComplete7">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete7="matAutocomplete" (optionSelected)="selectService7($event)">
                                 <mat-option *ngFor="let service of services7" [value]="service">
@@ -272,7 +272,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list8>
+                            <mat-chip-grid #list8>
                                 <mat-chip *ngFor="let service of selectedServices8"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -286,7 +286,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list8"
                                         [matAutocomplete]="autoComplete8">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete8="matAutocomplete" (optionSelected)="selectService8($event)">
                                 <mat-option *ngFor="let service of services8" [value]="service">
@@ -305,7 +305,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list9>
+                            <mat-chip-grid #list9>
                                 <mat-chip *ngFor="let service of selectedServices9"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -319,7 +319,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list9"
                                         [matAutocomplete]="autoComplete9">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete9="matAutocomplete" (optionSelected)="selectService9($event)">
                                 <mat-option *ngFor="let service of services9" [value]="service">
@@ -348,7 +348,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list10>
+                            <mat-chip-grid #list10>
                                 <mat-chip *ngFor="let service of selectedServices10"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -362,7 +362,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list10"
                                         [matAutocomplete]="autoComplete10">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete10="matAutocomplete" (optionSelected)="selectService10($event)">
                                 <mat-option *ngFor="let service of services10" [value]="service">
@@ -381,7 +381,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list11>
+                            <mat-chip-grid #list11>
                                 <mat-chip *ngFor="let service of selectedServices11"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -395,7 +395,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list11"
                                         [matAutocomplete]="autoComplete11">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete11="matAutocomplete" (optionSelected)="selectService11($event)">
                                 <mat-option *ngFor="let service of services11" [value]="service">
@@ -414,7 +414,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list12>
+                            <mat-chip-grid #list12>
                                 <mat-chip *ngFor="let service of selectedServices12"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -428,7 +428,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list12"
                                         [matAutocomplete]="autoComplete12">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete12="matAutocomplete" (optionSelected)="selectService12($event)">
                                 <mat-option *ngFor="let service of services12" [value]="service">
@@ -457,7 +457,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list13>
+                            <mat-chip-grid #list13>
                                 <mat-chip *ngFor="let service of selectedServices13"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -471,7 +471,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list13"
                                         [matAutocomplete]="autoComplete13">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete13="matAutocomplete" (optionSelected)="selectService13($event)">
                                 <mat-option *ngFor="let service of services13" [value]="service">
@@ -490,7 +490,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list14>
+                            <mat-chip-grid #list14>
                                 <mat-chip *ngFor="let service of selectedServices14"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -504,7 +504,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list14"
                                         [matAutocomplete]="autoComplete14">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete14="matAutocomplete" (optionSelected)="selectService14($event)">
                                 <mat-option *ngFor="let service of services14" [value]="service">
@@ -523,7 +523,7 @@
             
                     <div class="subdim-services" fxFlex>
                         <mat-form-field appearance="fill">
-                            <mat-chip-list #list15>
+                            <mat-chip-grid #list15>
                                 <mat-chip *ngFor="let service of selectedServices15"
                                         color="accent"
                                         [removable]="!disabledInputs" 
@@ -537,7 +537,7 @@
                                         [placeholder]="disabledInputs ? '' : 'Type service here'"
                                         [matChipInputFor]="list15"
                                         [matAutocomplete]="autoComplete15">
-                            </mat-chip-list>
+                            </mat-chip-grid>
             
                             <mat-autocomplete #autoComplete15="matAutocomplete" (optionSelected)="selectService15($event)">
                                 <mat-option *ngFor="let service of services15" [value]="service">
