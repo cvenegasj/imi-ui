@@ -47,10 +47,12 @@ import { ImiDialogGroupComponent } from './imi-dialog-group/imi-dialog-group.com
     ReactiveFormsModule,
     HttpClientModule,
     AuthModule.forRoot({
-      // domain: 'symbiocreation.auth0.com',
-      // clientId: 'biZYk7qdeMeay5gDWODOg0A707P2JEnR',
-      domain: 'dev-8eijwzo853nvei2s.us.auth0.com',
-      clientId: '9GBmsRDCamscnjmDQwK62wb9aCXpoWZZ',
+      // Credenciales Prod
+      domain: 'symbiocreation.auth0.com',
+      clientId: 'biZYk7qdeMeay5gDWODOg0A707P2JEnR',
+      // Credenciales Locales Test
+      // domain: 'dev-8eijwzo853nvei2s.us.auth0.com',
+      // clientId: '9GBmsRDCamscnjmDQwK62wb9aCXpoWZZ',
       authorizationParams: {
         redirect_uri: window.location.origin
       }
