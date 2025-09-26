@@ -89,7 +89,7 @@ export class ClientService {
 
     // Generar preguntas
     generarPreguntas(descripcion: string): Observable<any> {
-      let API_URL = `${this.apiUrl}/imi/generarPreguntas`;
+      let API_URL = `${this.apiUrl}/api/imi/generarPreguntas`;
       // let API_URL = `https://fobia-ws.wydnex.com/api/imi/generarPreguntas`;
       const body = { descripcion };
       return this.http.post<any>(API_URL, body, { headers: this.headers })
@@ -100,7 +100,7 @@ export class ClientService {
 
     // Analizar respuestas
     analizarRespuestas(payload: any): Observable<any> {
-      let API_URL = `${this.apiUrl}/imi/analizarRespuestas`;
+      let API_URL = `${this.apiUrl}/api/imi/analizarRespuestas`;
       // let API_URL = `https://fobia-ws.wydnex.com/api/imi/analizarRespuestas`;
       return this.http.post<any>(API_URL, payload, { headers: this.headers })
         .pipe(
