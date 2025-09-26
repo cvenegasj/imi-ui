@@ -1,0 +1,127 @@
+<div class="popup-overlay">
+  <div class="popup">
+    <div class="popup-header">
+      <h2>Cuestionario IMI Score</h2>
+      <button class="cerrar-btn" (click)="cerrarPopup()">×</button>
+    </div>
+
+    <div *ngIf="!preguntasCargadas && !resumenFinal">
+      <p>
+        Este cuestionario tiene como propósito ayudarte a completar tu IMI Score.
+        Por favor, responde cada sección con sinceridad.
+      </p>
+      <label><strong>Resumen de tu empresa:</strong></label>
+      <textarea [(ngModel)]="contexto" rows="4" style="width: 100%;"></textarea>
+      <button (click)="generarPreguntas()" [disabled]="cargando || !contexto.trim()">Comenzar Cuestionario</button>
+
+      <div *ngIf="cargando" class="cargando-container">
+        <div class="spinner"></div>
+        <p class="cargando-texto">Analizando información...</p>
+        <p class="frase-cargando">{{ fraseActual }}</p>
+      </div>
+
+    </div>
+
+    <div *ngIf="preguntasCargadas && !resumenFinal">
+      <div class="step-titulo">
+        <div>{{ categorias[pasoActual].key }}</div>
+        <div class="step-contador">
+          {{ pasoActual + 1 }} / {{ categorias.length }}
+        </div>
+      </div>
+
+      <div *ngFor="let pregunta of categorias[pasoActual]?.value; let idx = index">
+        <p><strong>{{ pregunta.pregunta }}</strong></p>
+        <div class="opcion" *ngFor="let opcion of pregunta.opciones">
+
+          <label>
+            <input
+              type="radio"
+              [name]="categorias[pasoActual].key + '-' + idx"
+              [value]="opcion.texto"
+              (change)="setRespuesta(categorias[pasoActual].key, pregunta.pregunta, opcion.texto)"
+              [checked]="respuestas[categorias[pasoActual].key] && respuestas[categorias[pasoActual].key][pregunta.pregunta] === opcion.texto"
+            />
+            {{ opcion.texto }}
+          </label>
+
+        </div>
+
+        <div class="opcion">
+
+          <label>
+            <input
+              type="radio"
+              [value]="'__libre__'"
+              [name]="categorias[pasoActual].key + '-' + idx"
+              (change)="usarTextoLibre(categorias[pasoActual].key, pregunta.pregunta)"
+            />
+            Otra (especificar)
+          </label>
+
+          <textarea
+            *ngIf="respuestaLibreActiva(categorias[pasoActual].key, pregunta.pregunta)"
+            [(ngModel)]="textoLibre[categorias[pasoActual].key][pregunta.pregunta]"
+            placeholder="Escribe tu respuesta aquí..."
+            rows="2"
+            style="width: 100%; margin-top: 8px;"
+          ></textarea>
+
+        </div>
+
+
+      </div>
+
+      <div class="acciones">
+        <button (click)="irAlPasoAnterior()" [disabled]="pasoActual === 0">Anterior</button>
+        <button (click)="irAlSiguientePaso()" [disabled]="pasoActual >= categorias.length - 1">Siguiente</button>
+      </div>
+
+      <div *ngIf="enviando" class="loading-container">
+        <div class="spinner"></div>
+        <span class="loading-text">Analizando respuestas...</span>
+        <div class="frase-motivadora">{{ fraseActual }}</div>
+      </div>
+
+      <div class="acciones-final">
+        <button (click)="enviarRespuestas()" [disabled]="!todasRespondidas() || enviando">Analizar Resumen</button>
+        <button (click)="cerrarPopup()">Cerrar</button>
+      </div>
+
+    </div>
+
+    <div *ngIf="resumenFinal" class="resumen-container" id="resumen-pdf">
+      <h3>Resumen Ejecutivo</h3>
+      <p>{{ resumenFinal.resumen }}</p>
+
+      <h4>Puntajes por Subcategoría</h4>
+      <div *ngFor="let categoria of keys(resumenFinal.puntajes)">
+        <strong>{{ categoria }}</strong>
+        <ul>
+          <li *ngFor="let sub of keys(resumenFinal.puntajes[categoria])">
+            {{ sub }}:
+            <strong>{{ resumenFinal.puntajes[categoria][sub].puntaje }}</strong> –
+            {{ resumenFinal.puntajes[categoria][sub].justificacion }}
+          </li>
+        </ul>
+      </div>
+
+      <h4>Recomendaciones por Categoría</h4>
+      <ul>
+        <li *ngFor="let cat of keys(resumenFinal.recomendaciones)">
+          <strong>{{ cat }}:</strong> {{ resumenFinal.recomendaciones[cat] }}
+        </li>
+      </ul>
+
+      <h4>Recomendación General</h4>
+      <p>{{ resumenFinal.recomendacion_general }}</p>
+
+      <div id="grafico-popup" style="text-align:center; margin-top: 20px;"></div>
+
+      <div class="acciones-final">
+        <button (click)="imprimirResumen()">Descargar PDF</button>
+        <button (click)="cerrarPopup()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,8 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { ProviderDetailDialogComponent } from './provider-detail-dialog/provider-detail-dialog.component';
 import { ProviderServicesComponent } from './provider-services/provider-services.component';
 import { ImiMapPlotComponent } from './imi-map-plot/imi-map-plot.component';
+import { OrdenarCategoriasPipe } from './imi-vars/pipe/ordenar-categorias.pipe';
+import { ImiDialogGroupComponent } from './imi-dialog-group/imi-dialog-group.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ImiMapPlotComponent } from './imi-map-plot/imi-map-plot.component';
     ProviderDetailDialogComponent,
     ProviderServicesComponent,
     ImiMapPlotComponent,
+    OrdenarCategoriasPipe,
+    ImiDialogGroupComponent,
 
   ],
   imports: [
@@ -43,14 +47,18 @@ import { ImiMapPlotComponent } from './imi-map-plot/imi-map-plot.component';
     ReactiveFormsModule,
     HttpClientModule,
     AuthModule.forRoot({
+      // Credenciales Prod
       domain: 'symbiocreation.auth0.com',
       clientId: 'biZYk7qdeMeay5gDWODOg0A707P2JEnR',
+      // Credenciales Locales Test
+      // domain: 'dev-8eijwzo853nvei2s.us.auth0.com',
+      // clientId: '9GBmsRDCamscnjmDQwK62wb9aCXpoWZZ',
       authorizationParams: {
         redirect_uri: window.location.origin
       }
     }),
     LinkyModule,
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

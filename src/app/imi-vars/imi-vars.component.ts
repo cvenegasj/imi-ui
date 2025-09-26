@@ -33,7 +33,7 @@ export class ImiVarsComponent implements OnInit {
 
   selectedCountries: string[] = [];
   selectedIndustries: string[] = [];
-  
+
   // countries
   countries: string[] = Util.COUNTRY_LIST;
   filteredCountries: Observable<string[]>;
@@ -51,28 +51,28 @@ export class ImiVarsComponent implements OnInit {
   lastImi?: Imi;
 
   /*data = [
-    [ 
+    [
       {axis: "Product", value: 3},
       {axis: "Resources", value: 2},
       {axis: "Information", value: 2},
       {axis: "Organization", value: 5},
-      {axis: "Innovation", value: 1}			
+      {axis: "Innovation", value: 1}
     ],[
       {axis: "Product", value: 4},
       {axis: "Resources", value: 1},
       {axis: "Information", value: 1},
       {axis: "Organization", value: 2},
-      {axis: "Innovation", value: 3}	
+      {axis: "Innovation", value: 3}
     ],[
       {axis: "Product", value: 1},
       {axis: "Resources", value: 2},
       {axis: "Information", value: 2},
       {axis: "Organization", value: 2},
-      {axis: "Innovation", value: 3}	
+      {axis: "Innovation", value: 3}
     ]
   ];*/
 
-  @ViewChild('chartContainer', {static: true}) 
+  @ViewChild('chartContainer', {static: true})
   chartContainer!: ElementRef;
   dimensions: DimensionsType;
   wrapper: any;
@@ -95,7 +95,7 @@ export class ImiVarsComponent implements OnInit {
       width: 450,
     }
     this.dimensions = {
-      ...this.dimensions, 
+      ...this.dimensions,
       boundedHeight: Math.max(this.dimensions.height - this.dimensions.marginTop - this.dimensions.marginBottom - 40, 0),
       boundedWidth: Math.max(this.dimensions.width - this.dimensions.marginLeft - this.dimensions.marginRight, 0),
     }
@@ -126,8 +126,8 @@ export class ImiVarsComponent implements OnInit {
 
   // returns imi score
   updateVarsAndData(): number {
-    if (!this.appUser.imis || this.appUser.imis.length === 0) { 
-      return 0; 
+    if (!this.appUser.imis || this.appUser.imis.length === 0) {
+      return 0;
     }
 
     this.lastImi = this.appUser.imis[this.appUser.imis.length - 1];
@@ -235,7 +235,7 @@ export class ImiVarsComponent implements OnInit {
 
           this.sharedService.nextAppUser(user);
           this.appUser = user;
-          
+
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.cleanAndCreateChart(); // redraw radar chart
@@ -261,7 +261,7 @@ export class ImiVarsComponent implements OnInit {
 
           this.sharedService.nextAppUser(user);
           this.appUser = user;
-          
+
           const imiScore = this.updateVarsAndData();
           this.onImiRecalculated.emit(imiScore); // pass imi score to parent component
           this.cleanAndCreateChart(); // redraw radar chart
@@ -272,14 +272,14 @@ export class ImiVarsComponent implements OnInit {
           console.log("Updated!");
         });
     }
-    
+
     this.disabledSliders = true;
   }
 
   cleanAndCreateChart(): void {
     if (this.data.length === 0) {
-      this.renderer.setProperty(this.chartContainer.nativeElement, 
-        'innerHTML', 
+      this.renderer.setProperty(this.chartContainer.nativeElement,
+        'innerHTML',
         '<p class="gray-700 centered" style="width: 370px; margin-top: 100px;">No data to show.</p>');
       return;
     }
@@ -292,7 +292,7 @@ export class ImiVarsComponent implements OnInit {
     const color = d3.scaleOrdinal()
         .range(["#64DD17", "#CC333F", "#EDC951"]);
 				//.range(["#00A0B0", "#CC333F", "#EDC951"]);
-				
+
 		let radarChartOptions = {
 			  w: this.dimensions.boundedWidth,
 			  h: this.dimensions.boundedHeight,
@@ -312,14 +312,14 @@ export class ImiVarsComponent implements OnInit {
   }
 
   drawCustomRadarChart(data: any, cfg: any): void {
-    var maxValue = cfg.maxValue; 
-		
+    var maxValue = cfg.maxValue;
+
     var allAxis = (data[0].map((i: any, j: any) => i.axis)),	//Names of each axis
       total = allAxis.length,					//The number of different axes
       radius = Math.min(cfg.w/2, cfg.h/2), 	//Radius of the outermost circle
       //Format = d3.format('.0%'),			 	//Percentage formatting
       angleSlice = Math.PI * 2 / total;		//The width in radians of each "slice"
-    
+
     //Scale for the radius
     var rScale = d3.scaleLinear()
       .range([0, radius])
@@ -338,7 +338,7 @@ export class ImiVarsComponent implements OnInit {
     /////////////////////////////////////////////////////////
     ////////// Glow filter for some extra pizzazz ///////////
     /////////////////////////////////////////////////////////
-    
+
     //Filter for the outside glow
     var filter = this.bounds.append('defs').append('filter').attr('id','glow'),
       feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
@@ -380,7 +380,7 @@ export class ImiVarsComponent implements OnInit {
     /////////////////////////////////////////////////////////
     //////////////////// Draw the axes //////////////////////
     /////////////////////////////////////////////////////////
-      
+
     //Create the straight lines radiating outward from the center
     var axis = axisGrid.selectAll(".axis")
       .data(allAxis)
@@ -411,25 +411,25 @@ export class ImiVarsComponent implements OnInit {
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
     /////////////////////////////////////////////////////////
-      
+
     //The radial line function
     var radarLine = d3.lineRadial()
       .curve(d3.curveLinearClosed)
       .radius((d: any) => rScale(d.value))
       .angle((d: any, i: number) => i * angleSlice);
-      
+
     if (cfg.roundStrokes) {
       //radarLine.interpolate("cardinal-closed");
       radarLine.curve(d3.curveCardinalClosed);
     }
-          
-    //Create a wrapper for the blobs	
+
+    //Create a wrapper for the blobs
     var blobWrapper = this.bounds.selectAll(".radarWrapper")
       .data(data)
       .enter().append("g")
       .attr("class", "radarWrapper");
-        
-    //Append the backgrounds	
+
+    //Append the backgrounds
     blobWrapper
       .append("path")
       .attr("class", "radarArea")
@@ -440,11 +440,11 @@ export class ImiVarsComponent implements OnInit {
         //Dim all blobs
         d3.selectAll(".radarArea")
           .transition().duration(200)
-          .style("fill-opacity", 0.1); 
+          .style("fill-opacity", 0.1);
         //Bring back the hovered over blob
         d3.select(event.currentTarget)
           .transition().duration(200)
-          .style("fill-opacity", 0.7);	
+          .style("fill-opacity", 0.7);
       })
       .on('mouseout', () => {
         //Bring back all blobs
@@ -452,15 +452,15 @@ export class ImiVarsComponent implements OnInit {
           .transition().duration(200)
           .style("fill-opacity", cfg.opacityArea);
       });
-      
-    //Create the outlines	
+
+    //Create the outlines
     blobWrapper.append("path")
       .attr("class", "radarStroke")
       .attr("d", (d: any, i: any) => radarLine(d))
       .style("stroke-width", cfg.strokeWidth + "px")
       .style("stroke", (d: any, i: any) => cfg.color(i))
       .style("fill", "none")
-      .style("filter" , "url(#glow)");		
+      .style("filter" , "url(#glow)");
 
     //Append the circles
     blobWrapper.selectAll(".radarCircle")
@@ -476,13 +476,13 @@ export class ImiVarsComponent implements OnInit {
     /////////////////////////////////////////////////////////
     //////// Append invisible circles for tooltip ///////////
     /////////////////////////////////////////////////////////
-      
+
     //Wrapper for the invisible circles on top
     var blobCircleWrapper = this.bounds.selectAll(".radarCircleWrapper")
       .data(data)
       .enter().append("g")
       .attr("class", "radarCircleWrapper");
-      
+
     //Append a set of invisible circles on top for the mouseover pop-up
     blobCircleWrapper.selectAll(".radarInvisibleCircle")
       .data((d: any, i: any) => d)
@@ -497,7 +497,7 @@ export class ImiVarsComponent implements OnInit {
         .on("mouseover", (event: any, d: any) => {
           let newX = parseFloat(d3.select(event.currentTarget).attr('cx')) - 10;
           let newY = parseFloat(d3.select(event.currentTarget).attr('cy')) - 10;
-              
+
           tooltip
             .attr('x', newX)
             .attr('y', newY)
@@ -509,7 +509,7 @@ export class ImiVarsComponent implements OnInit {
           tooltip.transition().duration(200)
             .style("opacity", 0);
         });
-      
+
     //Set up the small tooltip for when you hover over a circle
     var tooltip = this.bounds.append("text")
       .attr("class", "tooltip")
@@ -520,8 +520,7 @@ export class ImiVarsComponent implements OnInit {
 	/////////////////// Helper Function /////////////////////
 	/////////////////////////////////////////////////////////
 
-	//Taken from http://bl.ocks.org/mbostock/7555321
-	//Wraps SVG text	
+	//Wraps SVG text
 	wrap(text: any, width: any): void {
 	  text.each((d: any, i: any, nodes: any) => {
       var text = d3.select(nodes[i]),
@@ -534,7 +533,7 @@ export class ImiVarsComponent implements OnInit {
         x = text.attr("x"),
         dy = parseFloat(text.attr("dy")),
         tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
-        
+
       while (word = words.pop()) {
         line.push(word);
         tspan.text(line.join(" "));
@@ -556,7 +555,7 @@ export class ImiVarsComponent implements OnInit {
     // get imi data of country
     this.clientService.getCountryImiForDisplay(this.selectedCountries[0])
       .subscribe(res => {
-        if (!res) { 
+        if (!res) {
           this._snackBar.open('No data to show.', 'ok', {
             duration: 2000,
           });
@@ -564,7 +563,7 @@ export class ImiVarsComponent implements OnInit {
           //console.log(res);
           this.data[1] = res;
           this.cleanAndCreateChart();
-        }        
+        }
       });
   }
 
@@ -583,7 +582,7 @@ export class ImiVarsComponent implements OnInit {
     // get imi data of industry
     this.clientService.getIndustryImiForDisplay(this.selectedIndustries[0])
       .subscribe(res => {
-        if (!res) { 
+        if (!res) {
           this._snackBar.open('No data to show.', 'ok', {
             duration: 2000,
           });
@@ -591,7 +590,7 @@ export class ImiVarsComponent implements OnInit {
           //console.log(res);
           this.data[2] = res;
           this.cleanAndCreateChart();
-        }        
+        }
       });
   }
 
@@ -610,6 +609,114 @@ export class ImiVarsComponent implements OnInit {
   private _filter2(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.industries.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  mostrarPopup = false;
+  mostrarPopup2 = false;
+
+  abrirPopup() {
+      this.mostrarPopup = true;
+  }
+
+  cerrarPopup(resultados: any) {
+    this.mostrarPopup = false;
+    console.log('Resultados:', resultados);
+
+    const pm = resultados["Product Management"];
+    if (pm) {
+      if ('Product' in pm) this.sliderValues.value1 = pm.Product;
+      if ('Design' in pm) this.sliderValues.value2 = pm.Design;
+      if ('Fabrication' in pm) this.sliderValues.value3 = pm.Fabrication;
+    }
+
+    const rm = resultados["Resources Management"];
+    if (rm) {
+      if ('Materials' in rm) this.sliderValues.value4 = rm.Materials;
+      if ('Energy' in rm) this.sliderValues.value5 = rm.Energy;
+      if ('Logistics' in rm) this.sliderValues.value6 = rm.Logistics;
+    }
+
+    const im = resultados["Information Management"];
+    if (im) {
+      if ('Actuator' in im) this.sliderValues.value7 = im.Actuator;
+      if ('Processing' in im) this.sliderValues.value8 = im.Processing;
+      if ('Sensing' in im) this.sliderValues.value9 = im.Sensing;
+    }
+
+    const om = resultados["Organization Management"];
+    if (om) {
+      if ('Compliance' in om) this.sliderValues.value10 = om.Compliance;
+      if ('Impact' in om) this.sliderValues.value11 = om.Impact;
+      if ('Organization' in om) this.sliderValues.value12 = om.Organization;
+    }
+
+    const inm = resultados["Innovation Management"];
+    if (inm) {
+      if ('Innovation' in inm) this.sliderValues.value13 = inm.Innovation;
+      if ('Intellectual property' in inm) this.sliderValues.value14 = inm["Intellectual property"];
+      if ('Training' in inm) this.sliderValues.value15 = inm.Training;
+    }
+  }
+
+  abrirPopup2() {
+      this.mostrarPopup2 = true;
+  }
+
+  cerrarPopup2(resultados: any) {
+    this.mostrarPopup2 = false;
+    console.log('Resultados:', resultados);
+
+    const pm = resultados["Product Management"];
+    if (pm) {
+      if ('Product' in pm) this.sliderValues.value1 = pm.Product;
+      if ('Design' in pm) this.sliderValues.value2 = pm.Design;
+      if ('Fabrication' in pm) this.sliderValues.value3 = pm.Fabrication;
+    }
+
+    const rm = resultados["Resources Management"];
+    if (rm) {
+      if ('Materials' in rm) this.sliderValues.value4 = rm.Materials;
+      if ('Energy' in rm) this.sliderValues.value5 = rm.Energy;
+      if ('Logistics' in rm) this.sliderValues.value6 = rm.Logistics;
+    }
+
+    const im = resultados["Information Management"];
+    if (im) {
+      if ('Actuator' in im) this.sliderValues.value9 = im.Actuator;
+      if ('Processing' in im) this.sliderValues.value8 = im.Processing;
+      if ('Sensing' in im) this.sliderValues.value7 = im.Sensing;
+    }
+
+    const om = resultados["Organization Management"];
+    if (om) {
+      if ('Compliance' in om) this.sliderValues.value12 = om.Compliance;
+      if ('Impact' in om) this.sliderValues.value11 = om.Impact;
+      if ('Organization' in om) this.sliderValues.value10 = om.Organization;
+    }
+
+    const inm = resultados["Innovation Management"];
+    if (inm) {
+      if ('Innovation' in inm) this.sliderValues.value13 = inm.Innovation;
+      if ('Intellectual property' in inm) this.sliderValues.value14 = inm["Intellectual property"];
+      if ('Training' in inm) this.sliderValues.value15 = inm.Training;
+    }
+
+    // ✅ 🔹 Recalcular IMI y redibujar gráfico inmediatamente
+    this.updateChartFromSliders();
+
+  }
+
+  updateChartFromSliders(): void {
+    const big5Graph = [
+      { axis: "Product", value: (this.sliderValues.value1 + this.sliderValues.value2 + this.sliderValues.value3) / 3 },
+      { axis: "Resources", value: (this.sliderValues.value4 + this.sliderValues.value5 + this.sliderValues.value6) / 3 },
+      { axis: "Information", value: (this.sliderValues.value7 + this.sliderValues.value8 + this.sliderValues.value9) / 3 },
+      { axis: "Organization", value: (this.sliderValues.value10 + this.sliderValues.value11 + this.sliderValues.value12) / 3 },
+      { axis: "Innovation", value: (this.sliderValues.value13 + this.sliderValues.value14 + this.sliderValues.value15) / 3 },
+    ];
+
+    this.data[0] = big5Graph;
+    this.cleanAndCreateChart();
   }
 
 }

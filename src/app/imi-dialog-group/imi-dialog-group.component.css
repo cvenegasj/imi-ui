@@ -1,0 +1,265 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: aparecer 0.3s ease-in-out;
+}
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.popup h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.popup p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+textarea,
+input[type="text"] {
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.step-titulo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: #0077cc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.acciones,
+.acciones-final {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #0077cc;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.opcion {
+  margin-bottom: 0px;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  transition: background-color 0.2s;
+}
+
+.opcion:hover {
+  background-color: #e9f3ff;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cerrar-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.cerrar-btn:hover {
+  color: #FFF;
+}
+
+.resumen-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f4f8fb;
+  border-left: 4px solid #0077cc;
+}
+
+.resumen-container h3,
+.resumen-container h4 {
+  color: #0077cc;
+  margin-top: 1rem;
+}
+
+
+@media print {
+  .acciones-final {
+    display: none !important;
+  }
+
+  body {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  h3, h4 {
+    color: black !important;
+    margin-top: 16px;
+  }
+
+  ul {
+    margin-bottom: 12px;
+    padding-left: 20px;
+  }
+
+  p, li {
+    page-break-inside: avoid;
+  }
+
+  .resumen-container {
+    padding: 20px;
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #3f51b5; /* color primario */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cargando-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.spinner {
+  border: 4px solid #ccc;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cargando-texto {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.frase-cargando {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  max-width: 350px;
+}
+
+.frase-motivadora{
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  max-width: 350px;
+  font-weight: 400;
+}

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  resApiUrl: 'http://localhost:5000',
+  // resApiUrl: 'http://localhost:5000',
+  resApiUrl: 'https://srv.imi.technology',
   //localhost: 'http://localhost:4200',
 };
 

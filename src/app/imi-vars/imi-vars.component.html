@@ -1,18 +1,26 @@
-<mat-card class="card-1"> 
+<mat-card class="card-1">
 
     <mat-card-content fxLayout="row">
-    
+
         <div fxFlex style="padding-top: 75px; margin-right: 60px; margin-left: 40px;">
+
+
 
             <div style="margin-bottom: 20px;">
                 <button mat-button color="accent" (click)="disabledSliders = !disabledSliders;" *ngIf="disabledSliders">Edit values</button>
-                
+
+                <button mat-raised-button *ngIf="!disabledSliders" (click)="abrirPopup2()" style="margin-left: 5px;margin-left: 5px;background: #651fff;color: white;font-weight: 700;">Start</button>
+                <app-imi-dialog-group *ngIf="mostrarPopup2" (cerrar)="cerrarPopup2($event)"></app-imi-dialog-group>
+
+                <div style="margin-top: 10px;"></div>
+
                 <button mat-raised-button (click)="disabledSliders = !disabledSliders;" style="margin-right: 5px;" *ngIf="!disabledSliders">Cancel</button>
                 <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="!disabledSliders">Save Changes</button>
+
             </div>
-            
+
             <mat-accordion multi>
-                
+
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title class="font-13 bold uppercase">
@@ -223,17 +231,17 @@
                     </div>
 
                 </mat-expansion-panel>
-            
+
             </mat-accordion>
 
         </div>
 
         <div style="margin-top: 30px; margin-right: 50px;flex: 1;">
-            
+
             <div #chartContainer style="text-align: center;"></div>
-            
+
             <div fxLayout="row" style="margin: 0 0 10px 40px;">
-                
+
                 <mat-form-field appearance="fill" style="margin-right: 5px;flex:1;">
                     <mat-label>Show country IMI</mat-label>
 
